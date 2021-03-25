@@ -1,0 +1,11 @@
+.decrease,
+.increase{
+  cursor: pointer;
+  font-weight: 900;
+  user-select: none;
+  transition: all .2s;
+  &:hover{
+    transform: scale(1.2);
+    color: #202064;
+  }
+}
