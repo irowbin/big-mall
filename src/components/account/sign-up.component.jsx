@@ -1,7 +1,7 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import {CustomInput} from '../custom-elements/input.component'
 import {auth, createAuthenticatedUserProfile} from '../../firebase/firebase.service'
-
+import './sign-in-up.component.scss'
 export class SignUp extends React.Component {
     initialState = {
         displayName: '',
@@ -52,50 +52,54 @@ export class SignUp extends React.Component {
     render() {
         return (
             <div className="row mt-5 mx-auto w-75">
-                <div className="col h5 text-muted font-weight-bold">Create an account</div>
-                <div className="col-12 mb-2">
-                    <CustomInput
-                        placeholder={'Display Name'}
-                        type={'text'}
-                        name={'displayName'}
-                        value={this.state.displayName}
-                        handleChanges={this.handleChanges}/>
-                </div>
-                <div className="col-12 mb-2">
-                    <CustomInput
-                        placeholder={'email'}
-                        type={'email'}
-                        name={'email'}
-                        value={this.state.email}
-                        handleChanges={this.handleChanges}/>
-                </div>
-                <div className="col-12 mb-2">
-                    <CustomInput
-                        placeholder={'Password'}
-                        type={'password'}
-                        name={'password'}
-                        value={this.state.password}
-                        handleChanges={this.handleChanges}/>
-                </div>
-                <div className="col-12 mb-2">
-                    <CustomInput
-                        placeholder={'Confirm password'}
-                        type={'password'}
-                        name={'cPassword'}
-                        value={this.state.cPassword}
-                        handleChanges={this.handleChanges}
-                    />
-                    {
-                        this.validateEqualPassword()
-                    }
-                </div>
-                <div className="col-12 d-flex justify-content-end">
-                    <button onClick={this.saveChanges}
-                            disabled={!!this.validateEqualPassword()}
-                            className="btn btn-info">
-                        Register
-                    </button>
-                </div>
+              <div className="col signup-form">
+                  <div className="row">
+                      <div className="col h5 mb-4 text-muted font-weight-bold">Create an account</div>
+                      <div className="col-12 mb-2">
+                          <CustomInput
+                              placeholder={'Display Name'}
+                              type={'text'}
+                              name={'displayName'}
+                              value={this.state.displayName}
+                              handleChanges={this.handleChanges}/>
+                      </div>
+                      <div className="col-12 mb-2">
+                          <CustomInput
+                              placeholder={'email'}
+                              type={'email'}
+                              name={'email'}
+                              value={this.state.email}
+                              handleChanges={this.handleChanges}/>
+                      </div>
+                      <div className="col-12 mb-2">
+                          <CustomInput
+                              placeholder={'Password'}
+                              type={'password'}
+                              name={'password'}
+                              value={this.state.password}
+                              handleChanges={this.handleChanges}/>
+                      </div>
+                      <div className="col-12 mb-2">
+                          <CustomInput
+                              placeholder={'Confirm password'}
+                              type={'password'}
+                              name={'cPassword'}
+                              value={this.state.cPassword}
+                              handleChanges={this.handleChanges}
+                          />
+                          {
+                              this.validateEqualPassword()
+                          }
+                      </div>
+                      <div className="col-12 d-flex justify-content-end">
+                          <button onClick={this.saveChanges}
+                                  disabled={!!this.validateEqualPassword()}
+                                  className="btn btn-info">
+                              Register
+                          </button>
+                      </div>
+                  </div>
+              </div>
             </div>
         )
     }

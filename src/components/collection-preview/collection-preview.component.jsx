@@ -1,9 +1,11 @@
 import React from 'react'
 import {connect} from "react-redux";
 import {addToCart} from "../../store/action/cart/cart-action";
- const CollectionPreview = ({title, items, addToCart}) => {
+import './collection-preview.component.scss'
+import {withRouter} from "react-router-dom";
+ const CollectionPreview = ({title, items, addToCart, match}) => {
     return (
-        <div className="row">
+        <div className={`row ${match.params?.collectionId ? 'mt-3':'mt-5 mb-5'}`}>
             <div className='col-md-12'>
                 <div className="row">
                     <div className='col-md-12'>
@@ -15,25 +17,30 @@ import {addToCart} from "../../store/action/cart/cart-action";
                 </div>
                 <div className="row">
                     {
+                        items.some(s=>s) ?
                         items.map((item, index) =>
                             <div key={item.id}
-                                 className="col-md-4 mb-4">
-                                <div className=" card"
+                                 className={`mb-5 ${match?.params?.collectionId ? 'col-md-4':'col-md-3'}`}>
+                                <div className="card"
                                      style={{height: '250px'}}>
                                     <img className="card-img"
                                          src={item.imgUrl}
                                          alt="Bologna"
                                          style={{height: '100%'}}/>
                                     <div className="card-img-overlay text-center text-white d-flex flex-column justify-content-center align-items-center">
-                                        <div className="bg-light text-danger w-50  img-thumbnail"> {item.name}</div>
-                                        <button className="btn w-50 btn-outline-danger mt-2"
+                                        <div className="card-title item-desc"> {item.name}</div>
+                                        <div className="w-50 menu-button mt-2"
                                         onClick={()=>addToCart(item)}>
-                                            Add To Cart ${(index + 1)}
-                                        </button>
+                                            Add To Cart
+                                        </div>
                                     </div>
+                                    <div className='item-price'>Price: ${item.price}</div>
                                 </div>
                             </div>
                         )
+                            : <div className="alert alert-secondary">
+                            Out of stock!
+                            </div>
                     }
                 </div>
             </div>
@@ -43,4 +50,4 @@ import {addToCart} from "../../store/action/cart/cart-action";
 const mapDispatchToProps = dispatch =>({
     addToCart: cartItem => dispatch(addToCart(cartItem))
 })
-export default connect(null,mapDispatchToProps)(CollectionPreview)
+export default withRouter(connect(null,mapDispatchToProps)(CollectionPreview))

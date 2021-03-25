@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import React, {Suspense, Component, lazy} from 'react'
 import {HomePage} from './pages/homepage/homepage.component'
 import Navbar from './pages/navbar/navbar.component'
@@ -9,16 +9,15 @@ import {
     Redirect
 } from "react-router-dom";
 import {auth, createAuthenticatedUserProfile} from './firebase/firebase.service'
-import {connect, Provider} from 'react-redux'
-
-import {persistor, setCurrentUser} from './store'
+import {connect} from 'react-redux'
+import './App.scss'
+import {setCurrentUser} from './store'
 import {createStructuredSelector} from "reselect";
 import {selectCurrentUser} from "./store/selector/user/user-selector";
-import  ShopPage from './pages/shop/shop-page.component'
-
+import ShopPage from './pages/shop/shop-page.component'
 
 // lazy  components
-const AboutPage = lazy(() => import('./pages/about/about-page.component'))
+const HowToPage = lazy(() => import('./pages/how-to/how-to-page.component'))
 const AccountPage = lazy(() => import('./pages/account/account.component'))
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'))
 
@@ -42,30 +41,32 @@ class App extends Component {
         return (
             <div className="container-fluid px-0">
                 <Navbar/>
-                <Suspense fallback={<div>Loading...</div>}>
-                    <Switch>
-                        <Route exact
-                               path='/'
-                               component={HomePage}>
-                        </Route>
-                        <Route
-                               path='/about'
-                               component={AboutPage}>
-                        </Route>
-                        <Route
-                               path='/shop'
-                               component={ShopPage}>
-                        </Route>
-                        <Route
-                               path='/checkout'
-                               component={CheckoutPage}>
-                        </Route>
-                        <Route
-                               path='/account'
-                               render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<AccountPage/>)}>
-                        </Route>
-                    </Switch>
-                </Suspense>
+                <div className="d-block fix-top-space">
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Switch>
+                            <Route exact
+                                   path='/'
+                                   component={HomePage}>
+                            </Route>
+                            <Route
+                                path='/how-to'
+                                component={HowToPage}>
+                            </Route>
+                            <Route
+                                path='/shop'
+                                component={ShopPage}>
+                            </Route>
+                            <Route
+                                path='/checkout'
+                                component={CheckoutPage}>
+                            </Route>
+                            <Route
+                                path='/account'
+                                render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<AccountPage/>)}>
+                            </Route>
+                        </Switch>
+                    </Suspense>
+                </div>
             </div>
         );
     }

@@ -4,12 +4,12 @@ import {selectDirectorySection} from "../../store/selector/directory/directory-s
 import {connect} from "react-redux";
 
 const Directory = ({sections}) => (
-    <div className='row mt-2'>
+    <div className='row mt-5'>
         {sections.map(({id, url, ...rest}, index) =>
             <div key={id}
                  className={`mb-4 ${index > 2 ? 'col-md-6' : 'col-md-4'}`}>
                 <div className="card"
-                     style={{height: '270px'}}>
+                     style={{height: '360px'}}>
                     <img className="card-img"
                          src={url}
                          alt="Bologna"

@@ -1,0 +1,37 @@
+%link-style{
+    text-decoration: none;
+    color: white;
+}
+.menu-button{
+    @extend %link-style;
+    background: rgba(180, 35, 98,.90);
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100px;
+    margin: 0 auto;
+    text-align: center;
+    transition: all .2s;
+    padding: 10px 3px;
+&:hover {
+     @extend %link-style;
+     background: rgba(176, 23, 58, 0.8);
+     transform: translateY(-2px) scale(1.2);
+     box-shadow: 0 3px 5px -1 rgba(112, 11, 34, 0.65);
+ }
+}
+.item-desc{
+  font-weight: 900;
+  text-shadow: 0 0 #3e5c65;
+  width: 250px;
+  border-radius: 5px;
+  padding: 15px 10px;
+  margin: 0 auto 10px auto;
+  letter-spacing: 3px;
+  background: rgba(218, 218, 218, 0.6);
+  border: 1px solid #f3eded;
+}
+
+.fix-top-space{
+  margin-top: 100px;
+}
+

@@ -23,7 +23,8 @@
     "web-vitals": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -48,6 +49,8 @@
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
-    "redux-persist-transform-filter": "^0.0.20"
+    "express": "^4.17.1",
+    "redux-persist-transform-filter": "^0.0.20",
+    "serve-static": "^1.14.1"
   }
 }

@@ -1,0 +1,16 @@
+$default-border-radius: 10px;
+.card,.card-img-overlay{
+  border-radius: $default-border-radius;
+  img{
+    border-radius: $default-border-radius;
+  }
+  .item-price{
+    background: #d6d7e0;
+    width: 100px;
+    padding: 0 10px;
+    margin-left: 0;
+    margin-top: -23px;
+    border-bottom-left-radius: 5px;
+    box-shadow: 2px -4px 8px -5px #848484;
+  }
+}

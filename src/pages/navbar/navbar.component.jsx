@@ -11,10 +11,11 @@ import {toggleDropdown} from "../../store/action/cart/cart-action";
 import {selectCurrentUser} from "../../store/selector/user/user-selector";
 import {selectCartDropdownOpen} from "../../store/selector/cart/cart-selector";
 import {createStructuredSelector} from 'reselect'
+
 const Navbar = ({currentUser, isDropdownOpen, toggleDropdown}) => {
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
             <NavLink className="navbar-brand"
                      to="/">BIG-MALL</NavLink>
 
@@ -31,7 +32,7 @@ const Navbar = ({currentUser, isDropdownOpen, toggleDropdown}) => {
                     </li>
                     <li className="nav-item ">
                         <NavLink className="nav-link"
-                                 to="/about"> About </NavLink>
+                                 to="/how-to"> User Guide </NavLink>
                     </li>
                 </ul>
                 <div className="form-inline my-2 my-lg-0">
@@ -40,7 +41,7 @@ const Navbar = ({currentUser, isDropdownOpen, toggleDropdown}) => {
                         <li className="nav-item">
                             {
                                 currentUser ?
-                                    <div className="nav-link btn-link"
+                                    <div className="nav-link btn-link pointer"
                                          onClick={() => auth.signOut()}> SignOut</div>
                                     : <NavLink exact
                                                className="nav-link"
@@ -55,10 +56,7 @@ const Navbar = ({currentUser, isDropdownOpen, toggleDropdown}) => {
                                 <CartIcon/>
                             </span>
                             <div className={`dropdown-menu px-2 py-2 dropdown-menu-right  ${isDropdownOpen ? 'show' : ''}`}>
-
-
-                                <div className="w-100"> <CartDropdown/></div>
-
+                                <div className="w-100"><CartDropdown/></div>
                             </div>
                         </li>
                     </ul>
