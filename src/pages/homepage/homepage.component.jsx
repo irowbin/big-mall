@@ -3,8 +3,8 @@ import Directory from '../../components/directory/directory.component'
 
 export const HomePage = () => {
     return (
-        <div className='container-sm mx-auto'>
-        < Directory />
+        <div className='container mx-auto'>
+            <Directory/>
         </div>
     )
 }

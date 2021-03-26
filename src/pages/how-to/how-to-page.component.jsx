@@ -3,7 +3,7 @@ import {Component} from "react/cjs/react.production.min";
 export default class AboutPage extends Component {
     render() {
         return (
-            <div className="container mt-5 pt-5">
+            <div className="container pt-2">
                 <div className="list-group">
                     <span
                        className="list-group-item list-group-item-action flex-column align-items-start">

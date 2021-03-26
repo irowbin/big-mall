@@ -1,7 +1,7 @@
 import React from 'react'
 import {CustomInput} from '../custom-elements/input.component'
 import {auth, createAuthenticatedUserProfile} from '../../firebase/firebase.service'
-import './sign-in-up.component.scss'
+import {SignInUpFormContainer} from './sign-in-out.styles.component'
 export class SignUp extends React.Component {
     initialState = {
         displayName: '',
@@ -52,7 +52,7 @@ export class SignUp extends React.Component {
     render() {
         return (
             <div className="row mt-5 mx-auto w-75">
-              <div className="col signup-form">
+              <SignInUpFormContainer>
                   <div className="row">
                       <div className="col h5 mb-4 text-muted font-weight-bold">Create an account</div>
                       <div className="col-12 mb-2">
@@ -99,7 +99,7 @@ export class SignUp extends React.Component {
                           </button>
                       </div>
                   </div>
-              </div>
+              </SignInUpFormContainer>
             </div>
         )
     }

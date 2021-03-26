@@ -5,7 +5,7 @@ import './collection-preview.component.scss'
 import {withRouter} from "react-router-dom";
  const CollectionPreview = ({title, items, addToCart, match}) => {
     return (
-        <div className={`row ${match.params?.collectionId ? 'mt-3':'mt-5 mb-5'}`}>
+        <div className={`row mt-2 mb-5`}>
             <div className='col-md-12'>
                 <div className="row">
                     <div className='col-md-12'>
