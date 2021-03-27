@@ -1,25 +1,24 @@
 import './App.scss';
 import React, {Suspense, Component, lazy} from 'react'
-import {HomePage} from './pages/homepage/homepage.component'
-import Navbar from './pages/navbar/navbar.component'
+import {createStructuredSelector} from "reselect";
+import {connect} from 'react-redux'
 import {
-    BrowserRouter as Router,
     Switch,
     Route,
     Redirect
 } from "react-router-dom";
+// components
 import {auth, createAuthenticatedUserProfile} from './firebase/firebase.service'
-import {connect} from 'react-redux'
-import './App.scss'
 import {setCurrentUser} from './store'
-import {createStructuredSelector} from "reselect";
 import {selectCurrentUser} from "./store/selector/user/user-selector";
 import ShopPage from './pages/shop/shop-page.component'
-
+import Spinner from "./components/spinner/spinner.component";
+import Navbar from './pages/navbar/navbar.component'
 // lazy  components
 const HowToPage = lazy(() => import('./pages/how-to/how-to-page.component'))
 const AccountPage = lazy(() => import('./pages/account/account.component'))
 const CheckoutPage = lazy(() => import('./pages/checkout/checkout.component'))
+const HomePage  = lazy(() => import('./pages/homepage/homepage.component'))
 
 class App extends Component {
 
@@ -42,7 +41,7 @@ class App extends Component {
             <div className="container-fluid px-0">
                 <Navbar/>
                 <div className="d-block fix-top-space">
-                    <Suspense fallback={<div>Loading...</div>}>
+                    <Suspense fallback={<Spinner/>}>
                         <Switch>
                             <Route exact
                                    path='/'

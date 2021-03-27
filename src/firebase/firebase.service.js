@@ -22,6 +22,13 @@ provider.setCustomParameters({prompt: 'select_account'})
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider)
 
+export const addCollectionAndDocuments = async (key, obj) => {
+    const collectionRef = firestore.collection(key)
+    const batch = firestore.batch()
+    obj.forEach(o => batch.set(collectionRef.doc(), o))
+    return await batch.commit()
+}
+
 export default firestore
 
 export const createAuthenticatedUserProfile = async (userAuthRef, additionalRef) => {

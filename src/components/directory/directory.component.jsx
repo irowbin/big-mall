@@ -1,6 +1,6 @@
 import MenuItem from '../menu-items/menu-item.component'
 import {createStructuredSelector} from 'reselect'
-import {selectDirectorySection} from "../../store/selector/directory/directory-selector";
+import {selectDirectorySection} from "../../store/selector/shop/shop-selector";
 import {connect} from "react-redux";
 
 const Directory = ({sections}) => (

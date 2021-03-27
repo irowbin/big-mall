@@ -17,7 +17,7 @@ const Navbar = ({currentUser, isDropdownOpen, toggleDropdown}) => {
     return (
         <nav className="navbar fixed-top  navbar-expand-lg navbar-dark bg-dark">
             <NavLink className="navbar-brand"
-                     to="/">BIG-MALL</NavLink>
+                     to="/">BIG MALL</NavLink>
 
             <div className="collapse navbar-collapse">
                 <ul className="navbar-nav mr-auto">

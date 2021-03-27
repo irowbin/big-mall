@@ -13,9 +13,7 @@ ReactDOM.render(
         <PersistGate loading={null}
                      persistor={persistor}>
             <Router>
-
                 <App/>
-
             </Router>
         </PersistGate>
     </Provider>,

@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 }
 
 /**
- * Groups repeated item to one and increses qty
+ * Groups repeated item to one and increases qty
  * @param all
  * @param payload
  * @returns {*[]|*}

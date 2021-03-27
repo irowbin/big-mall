@@ -12,7 +12,7 @@ const StripeCheckoutButton = ({price}) => {
             token={onToken}
             stripeKey={publishableKey}
             label='Pay Now'
-            name='BIG-MALL Electronics INC'
+            name='BIG-MALL INC'
             billingAddress
             shippingAddress
             description={`Your total is $${price}`}
