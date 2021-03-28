@@ -8,7 +8,7 @@ import { toggleDropdown } from '../../store/action/cart/cart-action'
 import { selectCurrentUser } from '../../store/selector/user/user-selector'
 import { selectCartDropdownOpen } from '../../store/selector/cart/cart-selector'
 import { createStructuredSelector } from 'reselect'
-import { signOut } from '../../store'
+import { signOutStart } from '../../store'
 
 const Navbar = (props) => {
   const { currentUser, isDropdownOpen, toggleDropdown, signOut } = props
@@ -94,6 +94,6 @@ const mapStateToProps = createStructuredSelector({
 })
 const mapDispatchToProps = (dispatch) => ({
   toggleDropdown: () => dispatch(toggleDropdown()),
-  signOut: () => dispatch(signOut())
+  signOut: () => dispatch(signOutStart())
 })
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

@@ -7,7 +7,7 @@ import {
 import { UserActionTypes } from '../../action/user/user-action-types'
 import {
   signInSuccess,
-  signInSFailure
+  signInSFailure, signOutSuccess, signOutFailure
 } from '../../action/user/user-action'
 
 /**
@@ -57,9 +57,9 @@ function* signOut() {
   try {
     const userRef = yield auth.signOut()
     console.log(userRef)
-    yield put(signInSuccess(null))
+    yield put(signOutSuccess())
   } catch (e) {
-    yield signInSFailure(e.error)
+    yield signOutFailure(e.error)
   }
 }
 
@@ -68,6 +68,7 @@ function* signOut() {
 function* isUserAuthenticated() {
   try {
     const userRef = yield getCurrentUser()
+    if(!userRef) return
     yield snapshot(userRef)
   } catch (e) {
     yield signInSFailure(e.error)
@@ -93,7 +94,7 @@ function* onEmailSignInStart() {
 
 function* onSignOut() {
   try {
-    yield takeLatest(UserActionTypes.SIGN_OUT, signOut)
+    yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut)
   } catch (e) {
     // TODO: display sign out failing message
   }

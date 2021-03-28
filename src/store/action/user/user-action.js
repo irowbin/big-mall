@@ -22,8 +22,17 @@ export const emailSignInStart = (userCred) => ({
   payload: userCred,
 })
 
-export const signOut = () => ({
-  type: UserActionTypes.SIGN_OUT
+export const signOutStart = () => ({
+  type: UserActionTypes.SIGN_OUT_START
+})
+
+export const signOutSuccess = () => ({
+  type: UserActionTypes.SIGN_OUT_START_SUCCESS
+})
+
+export const signOutFailure = (error) => ({
+  type: UserActionTypes.SIGN_OUT_START_FAILURE,
+  payload: error,
 })
 
 
