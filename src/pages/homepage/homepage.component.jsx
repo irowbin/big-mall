@@ -1,24 +1,24 @@
-import {Component} from 'react'
+import { Component } from 'react'
 import './homepage.component.scss'
 import Directory from '../../components/directory/directory.component'
-import {fetchShopCollectionAsync} from '../../store/action/shop/shop-action';
-import {connect} from 'react-redux';
+import { fetchShopCollectionStart } from '../../store/action/shop/shop-action'
+import { connect } from 'react-redux'
 
-class HomePage extends Component{
-    componentDidMount() {
-        const {fetchCollectionAsync} = this.props
-        fetchCollectionAsync()
-    }
+class HomePage extends Component {
+  componentDidMount() {
+    const { fetchCollectionStart } = this.props
+    fetchCollectionStart()
+  }
 
-    render() {
-       return (
-           <div className='container mx-auto'>
-               <Directory/>
-           </div>
-       )
-   }
+  render() {
+    return (
+      <div className="container mx-auto">
+        <Directory />
+      </div>
+    )
+  }
 }
-const mapDispatchToProps = dispatch => ({
-    fetchCollectionAsync: () => dispatch(fetchShopCollectionAsync())
+const mapDispatchToProps = (dispatch) => ({
+  fetchCollectionStart: () => dispatch(fetchShopCollectionStart()),
 })
-export default  connect(null,mapDispatchToProps)(HomePage)
+export default connect(null, mapDispatchToProps)(HomePage)

@@ -1,6 +1,9 @@
-import {createSelector} from 'reselect'
+import { createSelector } from 'reselect'
 
-const selectCollections = state => state.shop
+const selectCollections = (state) => state.shop
 
-export const selectCollection = param => createSelector([selectCollections], collection => collection.sections[param])
-
+export const selectCollection = (param) =>
+  createSelector(
+    [selectCollections],
+    (collection) => collection.sections[param]
+  )

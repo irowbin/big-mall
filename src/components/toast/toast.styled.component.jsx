@@ -13,7 +13,7 @@ export const ToastStyledContainer = styled.div`
   background: #718c15;
   box-shadow: 0 0 10px -2px #474747;
   border-radius: 4px;
-  transition: all .2s;
+  transition: all 0.2s;
   outline: none;
 
   &:hover {
