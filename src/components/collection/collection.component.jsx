@@ -1,7 +1,7 @@
 import React from 'react'
-import {selectCollection} from "../../store/selector/collection/collection-selector";
-import {connect} from "react-redux";
-import CollectionPreview from "../collection-preview/collection-preview.component";
+import {selectCollection} from '../../store/selector/collection/collection-selector';
+import {connect} from 'react-redux';
+import CollectionPreview from '../collection-preview/collection-preview.component';
 
 const Collection = ({collection}) => {
     const {title, items} = collection

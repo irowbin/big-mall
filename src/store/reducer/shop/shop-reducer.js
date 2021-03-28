@@ -1,4 +1,4 @@
-import {ShopActionTypes} from "../../action/shop/shop-action-types";
+import {ShopActionTypes} from '../../action/shop/shop-action-types';
 const INITIAL_STATE = {
     sections: {},
     isFetching: false,

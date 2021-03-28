@@ -1,9 +1,13 @@
-import {ShopActionTypes} from "./shop-action-types";
-import {firestore} from "../../../firebase/firebase.service";
+import {ShopActionTypes} from './shop-action-types';
+import {firestore} from '../../../firebase/firebase.service';
 
-const mapResponseData = (data) => {
+const mapResponseData = (data) => data.map(d => ({...d.data(), id: d.id}))
+    .reduce((accum, elem) => {
+        const title = elem.title?.replace(/'/g, '').toLowerCase()
+        accum[title] = elem
+        return accum
+    }, {})
 
-}
 // redux thunk method
 export const fetchShopCollectionAsync = () => {
     return dispatch => {
@@ -11,13 +15,7 @@ export const fetchShopCollectionAsync = () => {
         dispatch(fetchShopCollectionStart())
         dataRef.get()
             .then(snap => {
-                const data = snap.docs.map(d => ({...d.data(), id: d.id}))
-                    .reduce((accum, elem) => {
-                        const title = elem.title?.replace(/'/g, '').toLowerCase()
-                        accum[title] = elem
-                        return accum
-                    }, {})
-                dispatch(fetchShopCollectionSuccess(data))
+                dispatch(fetchShopCollectionSuccess(mapResponseData(snap.docs)))
                 dispatch(fetchShopCollectionFailure(''))
             })
             .catch(ex => dispatch(fetchShopCollectionFailure(ex.message)))

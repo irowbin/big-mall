@@ -1,18 +1,18 @@
 import MenuItem from '../menu-items/menu-item.component'
 import {createStructuredSelector} from 'reselect'
-import {selectDirectorySection} from "../../store/selector/shop/shop-selector";
-import {connect} from "react-redux";
+import {selectDirectorySection} from '../../store/selector/shop/shop-selector';
+import {connect} from 'react-redux';
 
 const Directory = ({sections}) => (
     <div className='row mt-5'>
         {sections.map(({id, url, ...rest}, index) =>
             <div key={id}
                  className={`mb-4 ${index > 2 ? 'col-md-6' : 'col-md-4'}`}>
-                <div className="card"
+                <div className='card'
                      style={{height: '360px'}}>
-                    <img className="card-img"
+                    <img className='card-img'
                          src={url}
-                         alt="Bologna"
+                         alt='Bologna'
                          style={{height: '100%'}}/>
                     <MenuItem key={id}  {...rest}/>
                 </div>

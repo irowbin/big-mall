@@ -1,17 +1,17 @@
 import firebase from 'firebase/app'
 // Add the Firebase products that you want to use
-import "firebase/auth";
-import "firebase/firestore";
+import 'firebase/auth';
+import 'firebase/firestore';
 
 const config = {
-    apiKey: "AIzaSyBxOV4U2J9H915ytDDqn15KbHa4mBJGsNw",
-    authDomain: "irobin-466f2.firebaseapp.com",
-    databaseURL: "https://irobin-466f2.firebaseio.com",
-    projectId: "irobin-466f2",
-    storageBucket: "irobin-466f2.appspot.com",
-    messagingSenderId: "886032230851",
-    appId: "1:886032230851:web:cdb0e685716accf9e43576",
-    measurementId: "G-HYPHT73XCZ"
+    apiKey: 'AIzaSyBxOV4U2J9H915ytDDqn15KbHa4mBJGsNw',
+    authDomain: 'irobin-466f2.firebaseapp.com',
+    databaseURL: 'https://irobin-466f2.firebaseio.com',
+    projectId: 'irobin-466f2',
+    storageBucket: 'irobin-466f2.appspot.com',
+    messagingSenderId: '886032230851',
+    appId: '1:886032230851:web:cdb0e685716accf9e43576',
+    measurementId: 'G-HYPHT73XCZ'
 }
 firebase.initializeApp(config)
 

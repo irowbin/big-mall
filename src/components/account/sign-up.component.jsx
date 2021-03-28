@@ -51,11 +51,11 @@ export class SignUp extends React.Component {
 
     render() {
         return (
-            <div className="row mt-5 mx-auto w-75">
+            <div className='row mt-5 mx-auto w-75'>
               <SignInUpFormContainer>
-                  <div className="row">
-                      <div className="col h5 mb-4 text-muted font-weight-bold">Create an account</div>
-                      <div className="col-12 mb-2">
+                  <div className='row'>
+                      <div className='col h5 mb-4 text-muted font-weight-bold'>Create an account</div>
+                      <div className='col-12 mb-2'>
                           <CustomInput
                               placeholder={'Display Name'}
                               type={'text'}
@@ -63,7 +63,7 @@ export class SignUp extends React.Component {
                               value={this.state.displayName}
                               handleChanges={this.handleChanges}/>
                       </div>
-                      <div className="col-12 mb-2">
+                      <div className='col-12 mb-2'>
                           <CustomInput
                               placeholder={'email'}
                               type={'email'}
@@ -71,7 +71,7 @@ export class SignUp extends React.Component {
                               value={this.state.email}
                               handleChanges={this.handleChanges}/>
                       </div>
-                      <div className="col-12 mb-2">
+                      <div className='col-12 mb-2'>
                           <CustomInput
                               placeholder={'Password'}
                               type={'password'}
@@ -79,7 +79,7 @@ export class SignUp extends React.Component {
                               value={this.state.password}
                               handleChanges={this.handleChanges}/>
                       </div>
-                      <div className="col-12 mb-2">
+                      <div className='col-12 mb-2'>
                           <CustomInput
                               placeholder={'Confirm password'}
                               type={'password'}
@@ -91,10 +91,10 @@ export class SignUp extends React.Component {
                               this.validateEqualPassword()
                           }
                       </div>
-                      <div className="col-12 d-flex justify-content-end">
+                      <div className='col-12 d-flex justify-content-end'>
                           <button onClick={this.saveChanges}
                                   disabled={!!this.validateEqualPassword()}
-                                  className="btn btn-info">
+                                  className='btn btn-info'>
                               Register
                           </button>
                       </div>

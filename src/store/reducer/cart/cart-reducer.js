@@ -1,4 +1,4 @@
-import {CartActionTypes} from "../../action/cart/cart-action-types";
+import {CartActionTypes} from '../../action/cart/cart-action-types';
 
 const INITIAL_STATE = {
     isDropdownOpen: false,

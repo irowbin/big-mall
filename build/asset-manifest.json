@@ -1,0 +1,39 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7bce56dc.chunk.css",
+    "main.js": "/static/js/main.8ab73034.chunk.js",
+    "main.js.map": "/static/js/main.8ab73034.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.84f2202e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.84f2202e.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.75d5a3df.chunk.js": "/static/js/2.75d5a3df.chunk.js",
+    "static/js/2.75d5a3df.chunk.js.map": "/static/js/2.75d5a3df.chunk.js.map",
+    "static/js/3.d588a91e.chunk.js": "/static/js/3.d588a91e.chunk.js",
+    "static/js/3.d588a91e.chunk.js.map": "/static/js/3.d588a91e.chunk.js.map",
+    "static/css/4.bab0b925.chunk.css": "/static/css/4.bab0b925.chunk.css",
+    "static/js/4.84a0337c.chunk.js": "/static/js/4.84a0337c.chunk.js",
+    "static/js/4.84a0337c.chunk.js.map": "/static/js/4.84a0337c.chunk.js.map",
+    "static/css/5.9f11bf60.chunk.css": "/static/css/5.9f11bf60.chunk.css",
+    "static/js/5.c5451d74.chunk.js": "/static/js/5.c5451d74.chunk.js",
+    "static/js/5.c5451d74.chunk.js.map": "/static/js/5.c5451d74.chunk.js.map",
+    "static/js/6.1ef57505.chunk.js": "/static/js/6.1ef57505.chunk.js",
+    "static/js/6.1ef57505.chunk.js.map": "/static/js/6.1ef57505.chunk.js.map",
+    "static/js/7.051e7692.chunk.js": "/static/js/7.051e7692.chunk.js",
+    "static/js/7.051e7692.chunk.js.map": "/static/js/7.051e7692.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/4.bab0b925.chunk.css.map": "/static/css/4.bab0b925.chunk.css.map",
+    "static/css/5.9f11bf60.chunk.css.map": "/static/css/5.9f11bf60.chunk.css.map",
+    "static/css/main.7bce56dc.chunk.css.map": "/static/css/main.7bce56dc.chunk.css.map",
+    "static/js/2.75d5a3df.chunk.js.LICENSE.txt": "/static/js/2.75d5a3df.chunk.js.LICENSE.txt",
+    "static/js/3.d588a91e.chunk.js.LICENSE.txt": "/static/js/3.d588a91e.chunk.js.LICENSE.txt",
+    "static/media/11.2 shopping-bag.33832ca3.svg": "/static/media/11.2 shopping-bag.33832ca3.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.84f2202e.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.75d5a3df.chunk.js",
+    "static/css/main.7bce56dc.chunk.css",
+    "static/js/main.8ab73034.chunk.js"
+  ]
+}

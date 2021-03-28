@@ -1,18 +1,18 @@
 import './App.scss';
 import React, {Suspense, Component, lazy} from 'react'
-import {createStructuredSelector} from "reselect";
+import {createStructuredSelector} from 'reselect';
 import {connect} from 'react-redux'
 import {
     Switch,
     Route,
     Redirect
-} from "react-router-dom";
+} from 'react-router-dom';
 // components
 import {auth, createAuthenticatedUserProfile} from './firebase/firebase.service'
 import {setCurrentUser} from './store'
-import {selectCurrentUser} from "./store/selector/user/user-selector";
+import {selectCurrentUser} from './store/selector/user/user-selector';
 import ShopPage from './pages/shop/shop-page.component'
-import Spinner from "./components/spinner/spinner.component";
+import Spinner from './components/spinner/spinner.component';
 import Navbar from './pages/navbar/navbar.component'
 // lazy  components
 const HowToPage = lazy(() => import('./pages/how-to/how-to-page.component'))
@@ -38,9 +38,9 @@ class App extends Component {
 
     render() {
         return (
-            <div className="container-fluid px-0">
+            <div className='container-fluid px-0'>
                 <Navbar/>
-                <div className="d-block fix-top-space">
+                <div className='d-block fix-top-space'>
                     <Suspense fallback={<Spinner/>}>
                         <Switch>
                             <Route exact
@@ -61,7 +61,7 @@ class App extends Component {
                             </Route>
                             <Route
                                 path='/account'
-                                render={() => this.props.currentUser ? (<Redirect to="/"/>) : (<AccountPage/>)}>
+                                render={() => this.props.currentUser ? (<Redirect to='/'/>) : (<AccountPage/>)}>
                             </Route>
                         </Switch>
                     </Suspense>

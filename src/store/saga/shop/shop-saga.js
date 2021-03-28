@@ -1,12 +1,12 @@
 import {call, put, takeEvery, takeLatest,} from 'redux-saga/effects'
 import {ShopActionTypes} from '../../action/shop/shop-action-types'
-import {firestore} from "../../../firebase/firebase.service";
+import {firestore} from '../../../firebase/firebase.service';
 
 import {
     fetchShopCollectionFailure,
     fetchShopCollectionStart,
     fetchShopCollectionSuccess
-} from "../../action/shop/shop-action";
+} from '../../action/shop/shop-action';
 
 // create the saga middleware
 
@@ -44,13 +44,13 @@ function* fetchShopCollection(action) {
   Allows concurrent fetches of user.
 */
 // function* mySaga() {
-//     yield takeEvery("USER_FETCH_REQUESTED", fetchUser);
+//     yield takeEvery('USER_FETCH_REQUESTED', fetchUser);
 // }
 
 /*
   Alternatively you may use takeLatest.
 
-  Does not allow concurrent fetches of user. If "USER_FETCH_REQUESTED" gets
+  Does not allow concurrent fetches of user. If 'USER_FETCH_REQUESTED' gets
   dispatched while a fetch is already pending, that pending fetch is cancelled
   and only the latest one will be run.
 */

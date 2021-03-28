@@ -1,15 +1,15 @@
 import React from 'react'
-import {createStructuredSelector} from "reselect";
-import {selectCartItems, selectCartTotal} from "../../store/selector/cart/cart-selector";
-import {connect} from "react-redux";
-import {removeAllFromCart, addToCart, removeFromCart} from "../../store/action/cart/cart-action";
+import {createStructuredSelector} from 'reselect';
+import {selectCartItems, selectCartTotal} from '../../store/selector/cart/cart-selector';
+import {connect} from 'react-redux';
+import {removeAllFromCart, addToCart, removeFromCart} from '../../store/action/cart/cart-action';
 import './checkout.component.scss'
-import {withRouter} from "react-router-dom";
-import StripeCheckoutButton from "../../components/stripe/stripe-button.component";
+import {withRouter} from 'react-router-dom';
+import StripeCheckoutButton from '../../components/stripe/stripe-button.component';
 const Checkout = ({cartItems,cartTotal, dispatch}) => {
     return (
         <div className='container mt-5'>
-            <div className="checkout-wrap">
+            <div className='checkout-wrap'>
                 <table className='table table-borderless table-hover'>
                     <thead>
                     <tr>
@@ -28,7 +28,7 @@ const Checkout = ({cartItems,cartTotal, dispatch}) => {
                                 <img src={c.imgUrl}
                                      height='70'
                                      width='70'
-                                     alt="product"/>
+                                     alt='product'/>
                             </td>
                             <td>{c.name}</td>
                             <td>{c.desc}</td>
