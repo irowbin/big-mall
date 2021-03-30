@@ -16,13 +16,13 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
-
+console.log(process.env.MODE_ENV)
 if (process.env.MODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'client/build')))
+  app.use(express.static(path.join(__dirname, '/client/build')))
 
 // this * route is to serve project on different page routes except root `/`
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'client/build/index.html'))
+    res.sendFile(path.join(__dirname, '/client/build/index.html'))
   })
 }
 
