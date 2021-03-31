@@ -16,7 +16,7 @@ export const ToastStyledContainer =  styled.div`
   outline: none;
 
   &:hover {
-    background: #87a719;
+    background: ${props => props.isError ? '#d61559' : '#89a91b'};
   }
 `
 

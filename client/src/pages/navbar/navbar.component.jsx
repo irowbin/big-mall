@@ -1,17 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.component.scss'
-import { connect } from 'react-redux'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
-import { toggleDropdown } from '../../store/action/cart/cart-action'
 import { selectCurrentUser } from '../../store/selector/user/user-selector'
-import { selectCartDropdownOpen } from '../../store/selector/cart/cart-selector'
 import { createStructuredSelector } from 'reselect'
 import { signOutStart } from '../../store'
+import { CartContext } from '../../provider/cart/cart-provider'
 
 const Navbar = (props) => {
-  const { currentUser, isDropdownOpen, toggleDropdown, signOut } = props
+  const { currentUser, signOut } = props
+  const { toggleCartDropdown, isDropdownOpen } = useContext(CartContext)
   return (
     <nav className='navbar fixed-top  navbar-expand-lg navbar-dark bg-dark'>
       <NavLink className='navbar-brand'
@@ -25,22 +24,19 @@ const Navbar = (props) => {
             <NavLink exact
                      className='nav-link'
                      to='/'>
-              {' '}
-              Home{' '}
+              Home
             </NavLink>
           </li>
           <li className='nav-item '>
             <NavLink className='nav-link'
                      to='/shop'>
-              {' '}
-              Shop{' '}
+              Shop
             </NavLink>
           </li>
           <li className='nav-item '>
             <NavLink className='nav-link'
                      to='/how-to'>
-              {' '}
-              User Guide{' '}
+              User Guide
             </NavLink>
           </li>
         </ul>
@@ -52,29 +48,26 @@ const Navbar = (props) => {
                   className='nav-link btn-link pointer'
                   onClick={() => signOut()}
                 >
-                  {' '}
                   SignOut
                 </div>
               ) : (
                 <NavLink exact
                          className='nav-link'
                          to='/account'>
-                  {' '}
-                  Signin{' '}
+                  Signin
                 </NavLink>
               )}
             </li>
             <li className={`nav-item dropdown ${isDropdownOpen ? 'show' : ''}`}>
               <span
                 className='nav-link py-0 dropdown-toggle'
-                onClick={toggleDropdown}
+                onClick={toggleCartDropdown}
               >
                 <CartIcon />
               </span>
-              <div
-                className={`dropdown-menu px-2 py-2 dropdown-menu-right  ${
-                  isDropdownOpen ? 'show' : ''
-                }`}
+              <div className={`dropdown-menu px-2 py-2 dropdown-menu-right  ${
+                isDropdownOpen ? 'show' : ''
+              }`}
               >
                 <div className='w-100'>
                   <CartDropdown />
@@ -89,11 +82,11 @@ const Navbar = (props) => {
 }
 // pull outs the state from top level state
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser,
-  isDropdownOpen: selectCartDropdownOpen
+  currentUser: selectCurrentUser
+  // isDropdownOpen: selectCartDropdownOpen
 })
 const mapDispatchToProps = (dispatch) => ({
-  toggleDropdown: () => dispatch(toggleDropdown()),
+  // toggleDropdown: () => dispatch(toggleDropdown()),
   signOut: () => dispatch(signOutStart())
 })
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
+export default Navbar

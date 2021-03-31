@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { createStructuredSelector } from 'reselect'
 import {
   selectCartItems,
@@ -14,9 +14,11 @@ import './checkout.component.scss'
 import { withRouter } from 'react-router-dom'
 import StripeCheckoutButton from '../../components/stripe/stripe-button.component'
 import axios from 'axios'
+import { CartContext } from '../../provider/cart/cart-provider'
 
-const Checkout = ({ cartItems, cartTotal, dispatch }) => {
-  const stripePrice = cartTotal * 100
+const Checkout = () => {
+  const {cartItems, totalPrice, addItem, clearFromCart, removeItem}  = useContext(CartContext)
+  const stripePrice = totalPrice * 100
   const [response, setResponse] = useState({ errorMsg: '', successMsg: '' })
   const { errorMsg, successMsg } = response
   const onToken = (token) => {
@@ -69,14 +71,14 @@ const Checkout = ({ cartItems, cartTotal, dispatch }) => {
                 <div className='d-flex'>
                   <div
                     className='h4 font-weight-bolder decrease'
-                    onClick={() => dispatch(removeFromCart(c.id))}
+                    onClick={() => removeItem(c.id)}
                   >
                     &#10096;{' '}
                   </div>
                   <div className='mx-2'>{c.qty}</div>
                   <div
                     className='h4 font-weight-bolder increase'
-                    onClick={() => dispatch(addToCart(c))}
+                    onClick={() => addItem(c)}
                   >
                     &#10095;
                   </div>
@@ -86,7 +88,7 @@ const Checkout = ({ cartItems, cartTotal, dispatch }) => {
               <td>
                 <button
                   className='close'
-                  onClick={() => dispatch(clearAllFromCart(c.id))}
+                  onClick={() => clearFromCart(c.id)}
                 >
                   &#10005;
                 </button>
@@ -98,9 +100,9 @@ const Checkout = ({ cartItems, cartTotal, dispatch }) => {
           <tr>
             <td colSpan='6'>
               <div className='float-right h5 d-flex justify-content-between w-100 font-weight-bold'>
-                <StripeCheckoutButton price={cartTotal}
+                <StripeCheckoutButton price={totalPrice}
                                       onToken={onToken} />{' '}
-                <span>Total: ${cartTotal} </span>
+                <span>Total: ${totalPrice} </span>
               </div>
             </td>
           </tr>
@@ -110,8 +112,8 @@ const Checkout = ({ cartItems, cartTotal, dispatch }) => {
     </div>
   )
 }
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-  cartTotal: selectCartTotal
-})
-export default withRouter(connect(mapStateToProps)(Checkout))
+// const mapStateToProps = createStructuredSelector({
+//   cartItems: selectCartItems,
+//   cartTotal: selectCartTotal
+// })
+export default withRouter(Checkout)

@@ -7,14 +7,18 @@ import { Provider } from 'react-redux'
 import { persistor, store } from './store'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { PersistGate } from 'redux-persist/es/integration/react'
+import CartProvider from './provider/cart/cart-provider'
 
 ReactDOM.render(
   <Provider store={store}>
-    <PersistGate loading={null} persistor={persistor}>
-      <Router>
-        <App />
-      </Router>
-    </PersistGate>
+    <CartProvider>
+      <PersistGate loading={null}
+                   persistor={persistor}>
+        <Router>
+          <App />
+        </Router>
+      </PersistGate>
+    </CartProvider>
   </Provider>,
   document.getElementById('root')
 )

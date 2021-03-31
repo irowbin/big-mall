@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { CustomInput } from '../custom-elements/input.component'
 import { SignInUpFormContainer } from './sign-in-out.styles.component'
-import Toast from '../toast/toast.component'
 import {
   emailSignInStart,
   googleSignInStart
@@ -10,12 +9,24 @@ import {
 import { createStructuredSelector } from 'reselect'
 import { selectError, selectIsSigningStart, selectIsSuccess } from '../../store/selector/user/user-selector'
 import Spinner from '../spinner/spinner.component'
+import { hideToast, showToast } from '../../store/action/toast/toast-actions'
 
-const SignIn = ({ googleSignInStart, emailSignInStart, isSigningStart, isSuccess, error }) => {
+const SignIn = (props) => {
+  const { googleSignInStart, emailSignInStart, isSigningStart, isSuccess, error, showToast, hideToast } = props
   const [userCred, setUserCred] = useState({
     username: '',
     password: ''
   })
+
+  useEffect(()=>{
+    const uuid = window.URL.createObjectURL(new Blob([])).split('/').pop()
+    showToast({
+      uid: uuid,
+      isError: !!error,
+      message: error?.message,
+      onClose:  () => hideToast(uuid)
+    })
+  }, [error, showToast])
 
   const { username, password } = userCred
 
@@ -29,9 +40,6 @@ const SignIn = ({ googleSignInStart, emailSignInStart, isSigningStart, isSuccess
   }
   return (
     <div className='row mt-5 mx-auto w-75'>
-      {error ? <Toast isError={!!error}
-                          message={error?.message}
-                          onClose={error = null} /> : null}
       <SignInUpFormContainer>
         <div className='row'>
           <div className='col h5 mb-4 text-muted font-weight-bold'>
@@ -88,11 +96,14 @@ const SignIn = ({ googleSignInStart, emailSignInStart, isSigningStart, isSuccess
 }
 const mapDispatchToProps = (dispatch) => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
-  emailSignInStart: (user) => dispatch(emailSignInStart(user))
+  emailSignInStart: (user) => dispatch(emailSignInStart(user)),
+  showToast: (data) => dispatch(showToast(data)),
+  hideToast: (uuid) => dispatch(hideToast(uuid))
 })
 const mapStateToProps = createStructuredSelector({
   isSigningStart: selectIsSigningStart,
   isSuccess: selectIsSuccess,
   error: selectError
 })
+
 export default connect(mapStateToProps, mapDispatchToProps)(SignIn)

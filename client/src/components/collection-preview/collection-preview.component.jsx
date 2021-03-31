@@ -1,9 +1,9 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { addToCart } from '../../store/action/cart/cart-action'
+import React, { useContext } from 'react'
 import './collection-preview.component.scss'
 import { withRouter } from 'react-router-dom'
-const CollectionPreview = ({ title, items, addToCart, match }) => {
+import { CartContext } from '../../provider/cart/cart-provider'
+const CollectionPreview = ({ title, items,  match }) => {
+  const {addItem} = useContext(CartContext)
   return (
     <div className={'row mt-2 mb-5'}>
       <div className="col-md-12">
@@ -26,7 +26,7 @@ const CollectionPreview = ({ title, items, addToCart, match }) => {
                   match?.params?.collectionId ? 'col-md-4' : 'col-md-3'
                 }`}
               >
-                <div className="card" style={{ height: '250px' }}>
+                <div className="card" style={{ height: '240px' }}>
                   <img
                     className="card-img"
                     src={item.imgUrl}
@@ -37,7 +37,7 @@ const CollectionPreview = ({ title, items, addToCart, match }) => {
                     <div className="card-title item-desc"> {item.name}</div>
                     <div
                       className="w-50 menu-button mt-2"
-                      onClick={() => addToCart(item)}
+                      onClick={() => addItem(item)}
                     >
                       Add To Cart
                     </div>
@@ -54,7 +54,7 @@ const CollectionPreview = ({ title, items, addToCart, match }) => {
     </div>
   )
 }
-const mapDispatchToProps = (dispatch) => ({
-  addToCart: (cartItem) => dispatch(addToCart(cartItem)),
-})
-export default withRouter(connect(null, mapDispatchToProps)(CollectionPreview))
+// const mapDispatchToProps = (dispatch) => ({
+//   addToCart: (cartItem) => dispatch(addToCart(cartItem)),
+// })
+export default withRouter(CollectionPreview)

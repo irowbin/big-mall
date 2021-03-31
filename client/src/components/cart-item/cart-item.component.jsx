@@ -1,10 +1,8 @@
-import React from 'react'
-import { clearAllFromCart } from '../../store/action/cart/cart-action'
-import { connect } from 'react-redux'
-import { selectCartItems } from '../../store/selector/cart/cart-selector'
-import { createStructuredSelector } from 'reselect'
+import React, { useContext } from 'react'
+import { CartContext } from '../../provider/cart/cart-provider'
 
-const CartItem = ({ cartItems, clearAllFromCart }) => {
+const CartItem = () => {
+  const {clearFromCart, cartItems} = useContext(CartContext)
   return (
     <div
       className="d-flex flex-column justify-content-center"
@@ -28,7 +26,7 @@ const CartItem = ({ cartItems, clearAllFromCart }) => {
             </div>
             <div className="col-md-2 pr-0">
               <button
-                onClick={() => clearAllFromCart(item.id)}
+                onClick={() => clearFromCart(item.id)}
                 className="close"
               >
                 x
@@ -42,10 +40,10 @@ const CartItem = ({ cartItems, clearAllFromCart }) => {
     </div>
   )
 }
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-})
-const mapDispatchToProps = (dispatch) => ({
-  clearAllFromCart: (id) => dispatch(clearAllFromCart(id)),
-})
-export default connect(mapStateToProps, mapDispatchToProps)(CartItem)
+// const mapStateToProps = createStructuredSelector({
+//   cartItems: selectCartItems,
+// })
+// const mapDispatchToProps = (dispatch) => ({
+//   clearAllFromCart: (id) => dispatch(clearAllFromCart(id)),
+// })
+export default CartItem

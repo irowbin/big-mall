@@ -7,7 +7,7 @@ const Directory = ({ sections }) => (
   <div className="row mt-5">
     {sections.map(({ id, url, ...rest }, index) => (
       <div key={id} className={`mb-4 ${index > 2 ? 'col-md-6' : 'col-md-4'}`}>
-        <div className="card" style={{ height: '360px' }}>
+        <div className="card" style={{ height: '330px' }}>
           <img
             className="card-img"
             src={url}

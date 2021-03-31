@@ -9,6 +9,7 @@ import ShopPage from './pages/shop/shop-page.component'
 import Spinner from './components/spinner/spinner.component'
 import Navbar from './pages/navbar/navbar.component'
 import { checkUserSession } from './store'
+import Toast from './components/toast/toast.component'
 
 // lazy  components
 const HowToPage = lazy(() => import('./pages/how-to/how-to-page.component'))
@@ -20,7 +21,6 @@ const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession()
   }, [checkUserSession])
-
   return (
     <div className='container-fluid px-0'>
       <Navbar />
@@ -45,6 +45,7 @@ const App = ({ checkUserSession, currentUser }) => {
           </Switch>
         </Suspense>
       </div>
+      <Toast  />
     </div>
   )
 }

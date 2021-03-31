@@ -1,21 +1,19 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CartItem from '../cart-item/cart-item.component'
-import { createStructuredSelector } from 'reselect'
-import { selectCartItems } from '../../store/selector/cart/cart-selector'
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { toggleDropdown } from '../../store/action/cart/cart-action'
+import { CartContext } from '../../provider/cart/cart-provider'
 
-const CartDropdown = ({ cartItems, dispatch, history }) => {
+const CartDropdown = ({ history }) => {
+  const { toggleCartDropdown, cartItems } = useContext(CartContext)
   return (
     <div>
       <CartItem />
       {cartItems.some((s) => s) ? (
         <button
-          className="btn btn-block btn-outline-warning"
+          className='btn btn-block btn-outline-warning'
           onClick={() => [
             history.push('/checkout'),
-            dispatch(toggleDropdown()),
+            toggleCartDropdown()
           ]}
         >
           GO TO CHECKOUT
@@ -24,7 +22,7 @@ const CartDropdown = ({ cartItems, dispatch, history }) => {
     </div>
   )
 }
-const mapStateToProps = createStructuredSelector({
-  cartItems: selectCartItems,
-})
-export default withRouter(connect(mapStateToProps)(CartDropdown))
+// const mapStateToProps = createStructuredSelector({
+//   cartItems: selectCartItems
+// })
+export default withRouter(CartDropdown)
