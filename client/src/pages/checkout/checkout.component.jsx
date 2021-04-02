@@ -97,7 +97,7 @@ const Checkout = () => {
             <td colSpan='6'>
               <div className='float-right h5 d-flex justify-content-between w-100 font-weight-bold'>
                 {totalPrice > 0 ? (<>
-                  <StripeCheckoutButton price={totalPrice?.toFixed(2)}
+                  <StripeCheckoutButton price={typeof (totalPrice) ==='number' ? totalPrice?.toFixed(2) : totalPrice}
                                         onToken={onToken} />
                   <span>Total: ${totalPrice} </span>
                 </>) : null
