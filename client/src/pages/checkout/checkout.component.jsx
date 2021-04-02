@@ -1,23 +1,12 @@
 import React, { useContext, useState } from 'react'
-import { createStructuredSelector } from 'reselect'
-import {
-  selectCartItems,
-  selectCartTotal
-} from '../../store/selector/cart/cart-selector'
-import { connect } from 'react-redux'
-import {
-  clearAllFromCart,
-  addToCart,
-  removeFromCart
-} from '../../store/action/cart/cart-action'
 import './checkout.component.scss'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import StripeCheckoutButton from '../../components/stripe/stripe-button.component'
 import axios from 'axios'
 import { CartContext } from '../../provider/cart/cart-provider'
 
 const Checkout = () => {
-  const {cartItems, totalPrice, addItem, clearFromCart, removeItem}  = useContext(CartContext)
+  const { cartItems, totalPrice, addItem, clearFromCart, removeItem, resetCartItems } = useContext(CartContext)
   const stripePrice = totalPrice * 100
   const [response, setResponse] = useState({ errorMsg: '', successMsg: '' })
   const { errorMsg, successMsg } = response
@@ -30,7 +19,14 @@ const Checkout = () => {
         token
       }
     }).then(
-      () => setResponse({ errorMsg: '', successMsg: 'Payment has been successfully made.' })
+      () => {
+        setResponse({
+          errorMsg: '',
+          successMsg: <div>Payment has been successfully made. Go to <Link to={'/shop'}>shop page</Link> to add more
+                           product on cart.</div>
+        })
+        resetCartItems()
+      }
     ).catch(() => {
       setResponse({ successMsg: '', errorMsg: 'An error occurred when making payment. Please use test card info.' })
     })
@@ -100,14 +96,31 @@ const Checkout = () => {
           <tr>
             <td colSpan='6'>
               <div className='float-right h5 d-flex justify-content-between w-100 font-weight-bold'>
-                <StripeCheckoutButton price={totalPrice}
-                                      onToken={onToken} />{' '}
-                <span>Total: ${totalPrice} </span>
+                {totalPrice > 0 ? (<>
+                  <StripeCheckoutButton price={totalPrice?.toFixed(2)}
+                                        onToken={onToken} />
+                  <span>Total: ${totalPrice} </span>
+                </>) : null
+                }
               </div>
+
             </td>
           </tr>
           </tfoot>
         </table>
+        {
+          successMsg ?
+            <>
+              <div className='text-danger col'>
+                <div className='mb-2'>Please use test card info from below.</div>
+                <div>Card No: <b>4242 4242 4242 4242</b></div>
+                <div>Date: <b> {new Date().getUTCMonth() + 1} / {new Date().getFullYear().toString().substr(2)}</b></div>
+                <div>CVC: <b>123</b></div>
+              </div>
+            </>
+            : null
+        }
+
       </div>
     </div>
   )

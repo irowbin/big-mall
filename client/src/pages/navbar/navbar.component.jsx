@@ -1,16 +1,16 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.component.scss'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
-import { selectCurrentUser } from '../../store/selector/user/user-selector'
-import { createStructuredSelector } from 'reselect'
 import { signOutStart } from '../../store'
-import { CartContext } from '../../provider/cart/cart-provider'
+import { UserContext, CartContext } from '../../provider'
 
-const Navbar = (props) => {
-  const { currentUser, signOut } = props
+const Navbar = () => {
+  const [isProfileDropdown, setIsProfileDropdown] = useState()
   const { toggleCartDropdown, isDropdownOpen } = useContext(CartContext)
+  const { state, dispatch } = useContext(UserContext)
+  const { currentUser } = state
   return (
     <nav className='navbar fixed-top  navbar-expand-lg navbar-dark bg-dark'>
       <NavLink className='navbar-brand'
@@ -43,29 +43,42 @@ const Navbar = (props) => {
         <div className='form-inline my-2 my-lg-0'>
           <ul className='navbar-nav mr-auto'>
             <li className='nav-item'>
-              {currentUser ? (
+              {!currentUser ?
+                (<NavLink exact
+                          className='nav-link'
+                          to='/account'>
+                    Signin
+                  </NavLink>
+                ) : null
+              }
+            </li>
+            <li className={`nav-item dropdown ${isProfileDropdown ? 'show' : ''}`}>
+              <span
+                className='nav-link dropdown-toggle'
+                onClick={() => [setIsProfileDropdown(!isProfileDropdown), isDropdownOpen ? toggleCartDropdown() :null]}
+              >
+                {currentUser?.displayName}
+              </span>
+              <div className={`dropdown-menu dropdown-menu-right  ${
+                isProfileDropdown ? 'show' : ''
+              }`}
+              >
                 <div
-                  className='nav-link btn-link pointer'
-                  onClick={() => signOut()}
+                  className="dropdown-item pointer"
+                  onClick={() => [dispatch(signOutStart()), setIsProfileDropdown(false)]}
                 >
                   SignOut
                 </div>
-              ) : (
-                <NavLink exact
-                         className='nav-link'
-                         to='/account'>
-                  Signin
-                </NavLink>
-              )}
+              </div>
             </li>
             <li className={`nav-item dropdown ${isDropdownOpen ? 'show' : ''}`}>
               <span
                 className='nav-link py-0 dropdown-toggle'
-                onClick={toggleCartDropdown}
+                onClick={()=>[toggleCartDropdown(), setIsProfileDropdown(false)]}
               >
                 <CartIcon />
               </span>
-              <div className={`dropdown-menu px-2 py-2 dropdown-menu-right  ${
+              <div className={`dropdown-menu cart-dropdown-menu  px-2 py-2 dropdown-menu-right  ${
                 isDropdownOpen ? 'show' : ''
               }`}
               >
@@ -81,12 +94,12 @@ const Navbar = (props) => {
   )
 }
 // pull outs the state from top level state
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
-  // isDropdownOpen: selectCartDropdownOpen
-})
-const mapDispatchToProps = (dispatch) => ({
-  // toggleDropdown: () => dispatch(toggleDropdown()),
-  signOut: () => dispatch(signOutStart())
-})
+// const mapStateToProps = createStructuredSelector({
+//   currentUser: selectCurrentUser
+//   isDropdownOpen: selectCartDropdownOpen
+// })
+// const mapDispatchToProps = (dispatch) => ({
+//   toggleDropdown: () => dispatch(toggleDropdown()),
+//   signOut: () => dispatch(signOutStart())
+// })
 export default Navbar

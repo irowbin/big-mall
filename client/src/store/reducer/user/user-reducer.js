@@ -1,62 +1,78 @@
 import { UserActionTypes } from '../../action/user/user-action-types'
 
-const INITIAL_STATE = {
+export const USER_INITIAL_STATE = {
   currentUser: null,
   isSigningStart: false,
+  isGoogleSignInStart: false,
   isSignupStart: false,
   isSuccess: false,
-  error: null
+  isSignOutStart: false,
+  error: null,
+  signInPayload: null,
+  signUpPayload: null
 }
-export const userReducer = (state = INITIAL_STATE, action) => {
+export const userReducer = (state, action) => {
   switch (action.type) {
     case UserActionTypes.SIGN_IN_SUCCESS:
       return {
         ...state,
-        ...INITIAL_STATE,
+        ...USER_INITIAL_STATE,
         currentUser: action.payload,
         isSuccess: true
       }
     case UserActionTypes.SIGN_IN_FAILURE:
       return {
         ...state,
-        ...INITIAL_STATE,
+        ...USER_INITIAL_STATE,
         error: action.payload
       }
     case UserActionTypes.SIGN_OUT_SUCCESS:
       return {
         ...state,
-        ...INITIAL_STATE
+        ...USER_INITIAL_STATE
       }
     case UserActionTypes.SIGN_OUT_FAILURE:
       return {
         ...state,
-        ...INITIAL_STATE,
+        ...USER_INITIAL_STATE,
         error: action.payload
       }
     case UserActionTypes.GOOGLE_SIGN_IN_START:
+      return {
+        ...state,
+        ...USER_INITIAL_STATE,
+        isGoogleSignInStart: true
+      }
     case UserActionTypes.EMAIL_SIGN_IN_START:
       return {
         ...state,
-        ...INITIAL_STATE,
-        isSigningStart: true
+        ...USER_INITIAL_STATE,
+        isSigningStart: true,
+        signInPayload: action.payload
+      }
+    case UserActionTypes.SIGN_OUT_START:
+      return {
+        ...state,
+        ...USER_INITIAL_STATE,
+        isSignOutStart : true,
       }
     case UserActionTypes.SIGN_UP_START:
       return {
         ...state,
-        ...INITIAL_STATE,
-        isSignupStart: true
-
+        ...USER_INITIAL_STATE,
+        isSignupStart: true,
+        signUpPayload: action.payload
       }
     case UserActionTypes.SIGN_UP_SUCCESS:
       return {
         ...state,
-        ...INITIAL_STATE,
+        ...USER_INITIAL_STATE,
         isSuccess: true
       }
     case UserActionTypes.SIGN_UP_FAILURE:
       return {
         ...state,
-        ...INITIAL_STATE,
+        ...USER_INITIAL_STATE,
         error: action.payload
       }
     default:

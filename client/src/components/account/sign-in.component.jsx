@@ -1,32 +1,35 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import React, { useState, useEffect, useContext } from 'react'
 import { CustomInput } from '../custom-elements/input.component'
 import { SignInUpFormContainer } from './sign-in-out.styles.component'
-import {
-  emailSignInStart,
-  googleSignInStart
-} from '../../store'
-import { createStructuredSelector } from 'reselect'
-import { selectError, selectIsSigningStart, selectIsSuccess } from '../../store/selector/user/user-selector'
 import Spinner from '../spinner/spinner.component'
-import { hideToast, showToast } from '../../store/action/toast/toast-actions'
+import { UserContext } from '../../provider'
+import { emailSignInStart, googleSignInStart } from '../../store'
+import { withRouter } from 'react-router-dom'
 
-const SignIn = (props) => {
-  const { googleSignInStart, emailSignInStart, isSigningStart, isSuccess, error, showToast, hideToast } = props
+const SignIn = ({ history }) => {
+  const { state, dispatch } = useContext(UserContext)
+  const { isSigningStart, isSuccess, error } = state
   const [userCred, setUserCred] = useState({
     username: '',
     password: ''
   })
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (!isSuccess || error) return
+    setTimeout(() => history.push('/'), 1000)
+  }, [isSuccess, history, error])
+
+  useEffect(() => {
+    if (!error) return
     const uuid = window.URL.createObjectURL(new Blob([])).split('/').pop()
-    showToast({
-      uid: uuid,
-      isError: !!error,
-      message: error?.message,
-      onClose:  () => hideToast(uuid)
-    })
-  }, [error, showToast])
+    // showToast({
+    //   uid: uuid,
+    //   isError: !!error,
+    //   message: error?.message,
+    //   onClose:  () => hideToast(uuid)
+    // })
+    console.log(error?.message)
+  }, [error])
 
   const { username, password } = userCred
 
@@ -36,11 +39,18 @@ const SignIn = (props) => {
   }
 
   const saveChanges = () => {
-    emailSignInStart({ username, password })
+    dispatch(emailSignInStart({ username, password }))
   }
   return (
     <div className='row mt-5 mx-auto w-75'>
       <SignInUpFormContainer>
+        {
+          error || isSuccess ?
+            <div className={`alert alert-${error ? 'danger' : 'success'}`}>
+              {error ? error.message : isSuccess ? 'Login successful..' : ''}
+            </div>
+            : null
+        }
         <div className='row'>
           <div className='col h5 mb-4 text-muted font-weight-bold'>
             Sign in to your account
@@ -82,28 +92,27 @@ const SignIn = (props) => {
               {isSigningStart ? 'ing' : ''}
             </button>
             <button
-              onClick={googleSignInStart}
+              onClick={()=>dispatch(googleSignInStart())}
               className='btn btn-outline-danger ml-3'
             >
               Signin with google
             </button>
-
           </div>
         </div>
       </SignInUpFormContainer>
     </div>
   )
 }
-const mapDispatchToProps = (dispatch) => ({
-  googleSignInStart: () => dispatch(googleSignInStart()),
-  emailSignInStart: (user) => dispatch(emailSignInStart(user)),
-  showToast: (data) => dispatch(showToast(data)),
-  hideToast: (uuid) => dispatch(hideToast(uuid))
-})
-const mapStateToProps = createStructuredSelector({
-  isSigningStart: selectIsSigningStart,
-  isSuccess: selectIsSuccess,
-  error: selectError
-})
+// const mapDispatchToProps = (dispatch) => ({
+//   googleSignInStart: () => dispatch(googleSignInStart()),
+//   emailSignInStart: (user) => dispatch(emailSignInStart(user)),
+//   showToast: (data) => dispatch(showToast(data)),
+//   hideToast: (uuid) => dispatch(hideToast(uuid))
+// })
+// const mapStateToProps = createStructuredSelector({
+//   isSigningStart: selectIsSigningStart,
+//   isSuccess: selectIsSuccess,
+//   error: selectError
+// })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SignIn)
+export default withRouter(SignIn)

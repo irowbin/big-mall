@@ -58,7 +58,7 @@ export const createAuthenticatedUserProfile = async (
 
   const snapshot = await userRef.get()
 
-  if (!snapshot.exists) {
+  if (!snapshot.exists && additionalRef) {
     const { displayName, email } = userAuthRef
     const createdAt = new Date()
     try {

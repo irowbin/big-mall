@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { selectIsSignupStart, selectIsSuccess } from '../../store/selector/user/user-selector'
+import React, { useContext, useEffect, useState } from 'react'
 import { CustomInput } from '../custom-elements/input.component'
 import { SignInUpFormContainer } from './sign-in-out.styles.component'
-import { signUpStart } from '../../store'
 import Spinner from '../spinner/spinner.component'
+import { UserContext } from '../../provider'
+import { signUpStart } from '../../store'
 
-const SignUp = ({ isSignupStart, signUpStart,isSuccess }) => {
+const SignUp = () => {
+  const {state, dispatch} = useContext(UserContext)
+  const {isSignupStart, isSuccess} = state
   const initialState = {
     displayName: '',
     email: '',
@@ -44,13 +44,12 @@ const SignUp = ({ isSignupStart, signUpStart,isSuccess }) => {
   }
 
   const saveChanges = () => {
-    signUpStart({ displayName, email, password })
-    try {
-      setUserForm({ ...initialState })
-    } catch (e) {
-      console.error(e)
-    }
+    dispatch(signUpStart({ displayName, email, password }))
   }
+
+  useEffect(()=>{
+    setUserForm({ ...initialState })
+  }, [isSuccess])
 
   return (
     <div className='row mt-5 mx-auto w-75'>
@@ -121,11 +120,11 @@ const SignUp = ({ isSignupStart, signUpStart,isSuccess }) => {
     </div>
   )
 }
-const mapStateToProps = createStructuredSelector({
-  isSignupStart: selectIsSignupStart,
-  isSuccess: selectIsSuccess
-})
-const mapDispatchToProps = dispatch => ({
-  signUpStart: (userInfo) => dispatch(signUpStart(userInfo))
-})
-export default connect(mapStateToProps, mapDispatchToProps)(SignUp)
+// const mapStateToProps = createStructuredSelector({
+//   isSignupStart: selectIsSignupStart,
+//   isSuccess: selectIsSuccess
+// })
+// const mapDispatchToProps = dispatch => ({
+//   signUpStart: (userInfo) => dispatch(signUpStart(userInfo))
+// })
+export default SignUp

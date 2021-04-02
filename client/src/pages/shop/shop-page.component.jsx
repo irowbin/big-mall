@@ -1,33 +1,34 @@
 import { Route } from 'react-router-dom'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
+import { ShopContext } from '../../provider/shop/shop-provider'
 import { fetchShopCollectionStart } from '../../store/action/shop/shop-action'
-import { connect } from 'react-redux'
-import collectionContainer from '../../components/collection/collection-container.component'
-import collectionOverviewContainer from '../../components/collection-overview/collection-overview-container.component'
+import CollectionOverview from '../../components/collection-overview/collection-overview.component'
+import Collection from '../../components/collection/collection.component'
 
-const ShopPage = ({ fetchCollectionStart, match }) => {
+const ShopPage = ({ match }) => {
+  const {dispatch} = useContext(ShopContext)
   useEffect(() => {
-    fetchCollectionStart()
-  }, [fetchCollectionStart])
+   dispatch(fetchShopCollectionStart())
+  }, [])
 
   return (
     <div className='container-fluid'>
       <Route
         exact
         path={`${match.path}`}
-        component={collectionOverviewContainer}
+        component={CollectionOverview}
       />
       {/*we use higher order component to conditionally render spinner and component.
                 render prop uses the same functionalities as normal component which takes same props*/}
       <Route
         path={`${match.path}/:collectionId`}
-        component={collectionContainer}
+        component={Collection}
       />
     </div>
   )
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  fetchCollectionStart: () => dispatch(fetchShopCollectionStart())
-})
-export default connect(null, mapDispatchToProps)(ShopPage)
+// const mapDispatchToProps = (dispatch) => ({
+//   fetchCollectionStart: () => dispatch(fetchShopCollectionStart())
+// })
+export default ShopPage

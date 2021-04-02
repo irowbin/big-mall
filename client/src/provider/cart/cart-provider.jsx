@@ -3,14 +3,12 @@ import React, { createContext, useState, useEffect } from 'react'
 const INITIAL_VALUE = {
   isDropdownOpen: false,
   cartItems: [],
-  toggleCartDropdown: () => {
+  toggleCartDropdown: () => {},
+  addItem: () => {},
+  removeItem: () => {},
+  clearFromCart: () => {
   },
-  addItem: (item) => {
-  },
-  removeItem: (id) => {
-  },
-  clearFromCart: (id) => {
-  },
+  resetCartItems: () =>{},
   cartCounts: 0,
   totalPrice: 0
 }
@@ -63,6 +61,7 @@ const CartProvider = ({ children }) => {
   const addItem = item => setCartItems(normalizedItems(cartItems, item))
   const clearFromCart = id => setCartItems([...cartItems.filter((c) => c.id !== id)])
   const removeItem = id => setCartItems(decrease(cartItems, id))
+  const resetCartItems = () => setCartItems([])
 
   useEffect(() => {
     setCartCounts(cartItems.reduce((a, b) => a + b.qty, 0))
@@ -78,7 +77,8 @@ const CartProvider = ({ children }) => {
       cartItems,
       cartCounts,
       clearFromCart,
-      totalPrice
+      totalPrice,
+      resetCartItems
     }}>
       {children}
     </CartContext.Provider>

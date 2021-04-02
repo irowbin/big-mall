@@ -1,11 +1,6 @@
 import { ShopActionTypes } from '../../action/shop/shop-action-types'
-const INITIAL_STATE = {
-  sections: {},
-  isFetching: false,
-  errorMessage: '',
-}
 
-export const shopReducer = (state = INITIAL_STATE, action) => {
+export const shopReducer = (state, action) => {
   switch (action.type) {
     case ShopActionTypes.FETCH_SHOP_COLLECTION_START:
       return {
