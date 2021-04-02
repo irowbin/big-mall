@@ -109,7 +109,7 @@ const Checkout = () => {
           </tfoot>
         </table>
         {
-          successMsg ?
+          cartItems?.some(s=>s) ?
             <>
               <div className='text-danger col'>
                 <div className='mb-2'>Please use test card info from below.</div>
