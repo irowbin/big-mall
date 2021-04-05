@@ -1,22 +1,27 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import CollectionPreview from '../collection-preview/collection-preview.component'
 import { ShopContext } from '../../provider/shop/shop-provider'
+import Spinner from '../spinner/spinner.component'
 
 const Collection = ({ match }) => {
-  const [collection, setCollection] = useState({ title: '', items: [] })
-  const { state } = useContext(ShopContext)
-  const { sections } = state
-  useEffect(() => {
-    if (!sections) return
-    const data = sections[match.params.collectionId]
-    setCollection(data)
-  }, [sections, match.params.collectionId])
-  const { title, items } = collection
   return (
-      <div className='container'>
-        <CollectionPreview items={items}
-                           title={title} />
-      </div>
+    <div className='container'>
+      <ShopContext.Consumer>
+        {
+          ({ state }) => {
+            const { isFetching, sections } = state
+            if (isFetching) return <Spinner isLoading
+                                            noBakcdrop />
+            if (!sections) return <div> No collections</div>
+            const data = sections[match.params.collectionId]
+            if (!data) return <div>No items for {match.params.collectionId} </div>
+            const { title, items } = data
+            return <CollectionPreview items={items}
+                                      title={title} />
+          }
+        }
+      </ShopContext.Consumer>
+    </div>
   )
 }
 // const mapStateToProps = (state, ownProps) => ({
