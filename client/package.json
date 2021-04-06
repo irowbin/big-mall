@@ -35,7 +35,6 @@
     "start": "node server.js",
     "dev": "react-scripts start ",
     "build": "react-scripts build",
-    "build-netlify": "react-scripts build && netlify-lambda build express",
     "test": "react-scripts test",
     "lint:fix": "eslint --fix src/**/*{js,jsx}",
     "eject": "react-scripts eject"
@@ -94,8 +93,7 @@
     "express": "^4.17.1",
     "prettier": "^2.2.1",
     "redux-persist-transform-filter": "^0.0.20",
-    "serve-static": "^1.14.1",
-    "netlify-lambda": "^2.0.3"
+    "serve-static": "^1.14.1"
   },
   "husky": {
     "hooks": {

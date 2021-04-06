@@ -20,11 +20,11 @@ if (process.env.MODE_ENV === 'production') {
 
 // this * route is to serve project on different page routes except root `/`
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, '/client/build/index.html'))
+    res.sendFile(path.join(__dirname, 'index.html'))
   })
 }
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 5000
 
 app.listen(port, error => {
   if (error) throw error
