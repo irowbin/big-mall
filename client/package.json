@@ -35,6 +35,7 @@
     "start": "node server.js",
     "dev": "react-scripts start ",
     "build": "react-scripts build",
+    "build-netlify": "react-scripts build && netlify-lambda build express",
     "test": "react-scripts test",
     "lint:fix": "eslint --fix src/**/*{js,jsx}",
     "eject": "react-scripts eject"

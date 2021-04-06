@@ -7,8 +7,8 @@
   conditions = {Language = ["en"], Country = ["US"], Role = ["admin"]}
 
 [build]
-  command = "npm install && npm run build"
-   # Directory to change to before starting a build.
+    command = "npm install && npm run build-netlify"
+    # Directory to change to before starting a build.
     # This is where we will look for package.json/.nvmrc/etc.
     # If not set, defaults to the root directory.
     base = "client/"
@@ -18,3 +18,5 @@
     # root directory if a base has not been set. This sample publishes the
     # directory located at the absolute path "root/project/build-output"
     publish = "build/"
+
+    functions = "functions"
