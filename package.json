@@ -9,7 +9,7 @@
   "scripts": {
     "client": "cd client && npm run dev",
     "server": "nodemon server.js",
-    "build": "./client && npm run build",
+    "build": "cd ./client && npm run build",
     "build-netlify": "netlify-lambda build  netlify-server.js",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server.js",
