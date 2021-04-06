@@ -7,4 +7,4 @@
   conditions = {Language = ["en"], Country = ["US"], Role = ["admin"]}
 
 [build]
-  command = "cd ./client npm install && npm run build"
+  command = "cd /opt/build/repo/client npm install && npm run build"
