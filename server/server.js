@@ -29,6 +29,7 @@ app.use(cors())
 // }
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../build/index.html')))
 
+app.use('/.netlify/functions/server', express.Router())  // path must route to lambda
 
 // const port = process.env.PORT || 5000
 //
