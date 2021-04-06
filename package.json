@@ -54,7 +54,7 @@
     "eject": "react-scripts eject",
     "client": "npm run dev-start",
     "server": "nodemon server-bak.js",
-    "build-netlify": "npm install && npm run build",
+    "build-netlify": "npm install && npm run build && netlify-lambda build server",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },

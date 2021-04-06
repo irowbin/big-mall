@@ -20,7 +20,7 @@ app.use(cors())
   app.use(express.static(path.join(__dirname, '/build')))
 
 // this * route is to serve project on different page routes except root `/`
-  app.get('*', function(req, res) {
+  app.get('/', function(req, res) {
     // res.sendFile(path.join(__dirname, 'index.html'))
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.write('<h1>Hello from Express.js!</h1>')
