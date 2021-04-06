@@ -27,6 +27,8 @@ app.use(cors())
     res.end()
   })
 // }
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../build/index.html')))
+
 
 // const port = process.env.PORT || 5000
 //
