@@ -12,3 +12,8 @@
     publish = "build"
 
     functions = "functions"
+
+[[redirects]]
+    from = "/*"
+    to = "/"
+    status = 200
