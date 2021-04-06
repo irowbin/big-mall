@@ -1,0 +1,32 @@
+{
+  "name": "big-mall-shop-server",
+  "version": "1.0.0",
+  "main": "functions/server.js",
+  "engines": {
+    "node": ">=10.16.0 <=14.x.x",
+    "npm": "6.14.9"
+  },
+  "scripts": {
+    "client": "cd client && npm run dev",
+    "server": "nodemon server-bak.js",
+    "build": "cd client npm install && npm run build",
+    "build-netlify": "cd client npm install && npm run build && netlify-lambda build ./express",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "start": "node server-bak.js",
+    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "compression": "1.7.4",
+    "cors": "2.8.5",
+    "dotenv": "7.0.0",
+    "express": "^4.16.4",
+    "stripe": "6.28.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.19.1",
+    "serverless-http": "^2.7.0",
+    "netlify-lambda": "^2.0.3"
+  }
+}
