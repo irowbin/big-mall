@@ -9,6 +9,7 @@ if (process.env.MODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
+const router = express.Router()
 // lets pass the secret key from env file.
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 
@@ -20,7 +21,7 @@ app.use(cors())
   app.use(express.static(path.join(__dirname, '/build')))
 
 // this * route is to serve project on different page routes except root `/`
-  app.get('/', function(req, res) {
+router.get('/', function(req, res) {
     // res.sendFile(path.join(__dirname, 'index.html'))
     res.writeHead(200, { 'Content-Type': 'text/html' })
     res.write('<h1>Hello from Express.js!</h1>')
@@ -29,7 +30,6 @@ app.use(cors())
 // }
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../build/index.html')))
 
-app.use('/.netlify/functions/server', express.Router())  // path must route to lambda
 
 // const port = process.env.PORT || 5000
 //
@@ -49,7 +49,7 @@ app.post('/payment', (req, res) => {
     res.status(stripeEx ? 500 : 200).send(stripeEx ? { error: stripeEx } : { success: stripeRes })
   })
 })
-
+app.use('/.netlify/functions/server', router)  // path must route to lambda
 module.exports = app
 module.exports.handler = serverless(app)
 
