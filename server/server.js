@@ -22,13 +22,13 @@ app.use(bodyParser.json())
 
 // this * route is to serve project on different page routes except root `/`
 router.get('/', function(req, res) {
-    // res.sendFile(path.join(__dirname, 'index.html'))
-    res.writeHead(200, { 'Content-Type': 'text/html' })
-    res.write('<h1>Hello from Express.js!</h1>')
-    res.end()
+    res.sendFile(path.join(__dirname, 'build/index.html'))
+    // res.writeHead(200, { 'Content-Type': 'text/html' })
+    // res.write('<h1>Hello from Express.js!</h1>')
+    // res.end()
   })
 // }
-// app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../index.html')))
+// app.use('/', (req, res) => res.sendFile(path.join(__dirname, './index.html')))
 
 
 // const port = process.env.PORT || 5000
