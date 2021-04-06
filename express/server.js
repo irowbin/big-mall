@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
-const serverless = require('serverless-http');
+const serverless = require('serverless-http')
 const app = express()
 
 if (process.env.MODE_ENV !== 'production') {
@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 if (process.env.MODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '/client/build')))
+  app.use(express.static(path.join(__dirname, '/build')))
 
 // this * route is to serve project on different page routes except root `/`
   app.get('*', function(req, res) {
@@ -43,6 +43,6 @@ app.post('/payment', (req, res) => {
   })
 })
 
-module.exports = app;
-module.exports.handler = serverless(app);
+module.exports = app
+module.exports.handler = serverless(app)
 
