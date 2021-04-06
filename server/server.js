@@ -15,7 +15,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
-if (process.env.MODE_ENV === 'production') {
+
+// if (process.env.MODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '/build')))
 
 // this * route is to serve project on different page routes except root `/`
@@ -25,14 +26,14 @@ if (process.env.MODE_ENV === 'production') {
     res.write('<h1>Hello from Express.js!</h1>')
     res.end()
   })
-}
+// }
 
-const port = process.env.PORT || 5000
-
-app.listen(port, error => {
-  if (error) throw error
-  console.log(`app is listening on port: ${port}`)
-})
+// const port = process.env.PORT || 5000
+//
+// app.listen(port, error => {
+//   if (error) throw error
+//   console.log(`app is listening on port: ${port}`)
+// })
 
 app.post('/payment', (req, res) => {
   console.log(req.body)
