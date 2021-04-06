@@ -9,8 +9,8 @@
   "scripts": {
     "client": "cd client && npm run dev",
     "server": "nodemon server.js",
-    "build": "cd ./client npm install && npm run build",
-    "build-netlify": "cd ./client npm install && npm run build && netlify-lambda build express",
+    "build": "cd client npm install && npm run build",
+    "build-netlify": "cd client npm install && npm run build && netlify-lambda build ./express",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"

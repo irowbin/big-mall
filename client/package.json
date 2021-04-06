@@ -34,7 +34,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "react-scripts start ",
-    "build": "react-scripts build",
+    "build": "npm install && react-scripts build",
     "test": "react-scripts test",
     "lint:fix": "eslint --fix src/**/*{js,jsx}",
     "eject": "react-scripts eject"
