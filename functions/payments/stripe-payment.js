@@ -12,7 +12,7 @@ module.exports = async (event) => {
 
     const payload = {
       source: reqBody.token.id,
-      amount: reqBody.amount,
+      amount:Math.round(reqBody.amount),
       currency: 'USD'
     }
     const sku = await stripe.charges.create(payload)
