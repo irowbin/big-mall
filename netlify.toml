@@ -15,10 +15,10 @@
 
 
 # API redirects
-#[[redirects]]
-#    from = "/api/payment/*"
-#    to= "/.netlify/functions/payment-handler/:splat"
-#    status = 200
+[[redirects]]
+    from = "/api/payment/*"
+    to= "/.netlify/functions/payment-handler/:splat"
+    status = 200
 
 # Static app redirects
 [[redirects]]
