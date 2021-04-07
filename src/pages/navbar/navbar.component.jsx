@@ -57,7 +57,7 @@ const Navbar = () => {
                 className='nav-link dropdown-toggle'
                 onClick={() => [setIsProfileDropdown(!isProfileDropdown), isDropdownOpen ? toggleCartDropdown() :null]}
               >
-                {currentUser?.displayName}
+                {currentUser?.displayName || currentUser?.email || (currentUser ? 'Profile' :'')}
               </span>
               <div className={`dropdown-menu dropdown-menu-right  ${
                 isProfileDropdown ? 'show' : ''

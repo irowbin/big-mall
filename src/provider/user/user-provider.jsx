@@ -14,7 +14,6 @@ import {
   signOutFailure, USER_INITIAL_STATE
 } from '../../store'
 
-
 export const UserContext = createContext(USER_INITIAL_STATE)
 
 const UserProvider = ({ children }) => {
@@ -33,7 +32,7 @@ const UserProvider = ({ children }) => {
     userRef.get().then(snapshot => {
       dispatch(signInSuccess({
         id: snapshot.id,
-        ...snapshot.data()
+        ...snapshot.data({serverTimestamps:'estimate'})
       }))
     }).catch(e => dispatch(signInFailure(e)))
   }
@@ -65,7 +64,7 @@ const UserProvider = ({ children }) => {
           username, // email in this case
           password
         )
-      //  const userRef = await createAuthenticatedUserProfile(user)
+        //  const userRef = await createAuthenticatedUserProfile(user)
         await handleLoginInfo(user)
       } catch (e) {
         dispatch(signInFailure(e))
@@ -81,7 +80,7 @@ const UserProvider = ({ children }) => {
   }, [signUpPayload, isSignupStart, handleSignup])
 
   useEffect(() => {
-    dispatch(checkUserSession)
+    dispatch(checkUserSession())
     handleCheckSession()
   }, [])
 

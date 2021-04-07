@@ -39,8 +39,8 @@ export default firestore
 export const getCurrentUser = () => {
   return new Promise((resolve, reject)=> {
     const unSub = auth.onAuthStateChanged(userRef =>{
-      unSub()
       resolve(userRef)
+      unSub()
     }, reject)
   })
 }
