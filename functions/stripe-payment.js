@@ -3,20 +3,19 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 exports.handler = async ({ body, headers, httpMethod }) => {
   try {
 
-    if(httpMethod === 'POST'){
+    if(httpMethod !== 'POST') return {
+      statusCode: 304
+    }
       const payload = {
         source: body.token.id,
         amount: body.amount,
         currency: 'usd'
       }
-      stripe.charges.create(payload, (stripeEx, stripeRes) => {
-      //  res.status(stripeEx ? 500 : 200).send(stripeEx ? { error: stripeEx } : { success: stripeRes })
-      })
-    }
+     const sku = stripe.charges.create(payload)
 
     return {
-      statusCode: 200,
-      body: JSON.stringify({ received: true }),
+      statusCode: 201,
+      body: JSON.stringify({ received: true, }),
     }
   } catch (err) {
     console.log(`Stripe webhook failed with ${err}`)
