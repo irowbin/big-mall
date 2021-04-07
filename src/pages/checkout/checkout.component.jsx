@@ -12,7 +12,7 @@ const Checkout = () => {
   const { errorMsg, successMsg } = response
   const onToken = (token) => {
     axios({
-      url: 'api/payment',
+      url: 'api/payment/stripe',
       method: 'post',
       data: {
         amount: stripePrice,

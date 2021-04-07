@@ -16,12 +16,12 @@
 
 # API redirects
 [[redirects]]
-    from = "/api/*"
-    to= "/netlify/functions/:spalt"
+    from = "/api/payment/*"
+    to= "/.netlify/functions/payment-handler/:splat"
     status = 200
 
 # Static app redirects
 [[redirects]]
     from = "/*"
     to = "/"
-    status = 200
+    status = 302
