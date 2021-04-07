@@ -4,7 +4,8 @@ exports.handler = async ({ body, headers, httpMethod }) => {
   try {
 
     if(httpMethod !== 'POST') return {
-      statusCode: 304
+      statusCode: 200,
+      body: JSON.stringify({message: 'not modified'})
     }
       const payload = {
         source: body.token.id,

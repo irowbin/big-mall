@@ -17,7 +17,7 @@
 # API redirects
 [[redirects]]
     from = "/api/*"
-    to= "/.netlify/functions/:spalt"
+    to= "/netlify/functions/:spalt"
     status = 200
 
 # Static app redirects
