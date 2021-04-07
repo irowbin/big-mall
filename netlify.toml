@@ -13,7 +13,14 @@
 
     functions = "functions"
 
+# Static app redirects
 [[redirects]]
     from = "/*"
     to = "/"
+    status = 200
+
+# API redirects
+[[redirects]]
+    from = "/api/*"
+    to= "/.netlify/functions/:splat"
     status = 200
