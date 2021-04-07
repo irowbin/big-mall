@@ -3,7 +3,7 @@ import './checkout.component.scss'
 import { Link, withRouter } from 'react-router-dom'
 import StripeCheckoutButton from '../../components/stripe/stripe-button.component'
 import axios from 'axios'
-import { CartContext } from '../../provider/cart/cart-provider'
+import { CartContext } from '../../provider'
 
 const Checkout = () => {
   const { cartItems, totalPrice, addItem, clearFromCart, removeItem, resetCartItems } = useContext(CartContext)
@@ -12,7 +12,7 @@ const Checkout = () => {
   const { errorMsg, successMsg } = response
   const onToken = (token) => {
     axios({
-      url: 'payment',
+      url: 'api/payment',
       method: 'post',
       data: {
         amount: stripePrice,
