@@ -2,7 +2,6 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const path = require('path')
-const serverless = require('serverless-http');
 const app = express()
 
 if (process.env.MODE_ENV !== 'production') {
@@ -20,11 +19,11 @@ if (process.env.MODE_ENV === 'production') {
 
 // this * route is to serve project on different page routes except root `/`
   app.get('*', function(req, res) {
-    res.sendFile(path.join(__dirname, 'index.html'))
+    res.sendFile(path.join(__dirname, '/client/build/index.html'))
   })
 }
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 8080
 
 app.listen(port, error => {
   if (error) throw error
@@ -42,7 +41,4 @@ app.post('/payment', (req, res) => {
     res.status(stripeEx ? 500 : 200).send(stripeEx ? { error: stripeEx } : { success: stripeRes })
   })
 })
-
-module.exports = app;
-module.exports.handler = serverless(app);
 

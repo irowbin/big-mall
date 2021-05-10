@@ -1,32 +1,122 @@
 {
-  "name": "big-mall-shop-server",
+  "name": "big-mall-app",
   "version": "1.0.0",
+  "private": true,
   "main": "functions/server.js",
   "engines": {
     "node": ">=10.16.0 <=14.x.x",
     "npm": "6.14.9"
   },
-  "scripts": {
-    "client": "cd client && npm run dev",
-    "server": "nodemon server.js",
-    "build": "cd client npm install && npm run build",
-    "build-netlify": "cd client npm install && npm run build && netlify-lambda build ./express",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
-  },
   "dependencies": {
+    "@apollo/client": "^3.3.13",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.8.3",
+    "axios": "^0.21.1",
+    "bootstrap": "^4.6.0",
+    "firebase": "^8.3.1",
+    "graphql": "^15.5.0",
+    "husky": "^5.2.0",
+    "lint-staged": "^10.5.4",
+    "node-sass": "^5.0.0",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "react-stripe-checkout": "^2.6.3",
+    "react-transition-group": "^4.4.1",
+    "redux": "^4.0.5",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.3",
+    "reselect": "^4.0.0",
+    "styled-components": "^5.2.1",
+    "web-vitals": "^1.1.0",
     "body-parser": "^1.18.3",
     "compression": "1.7.4",
     "cors": "2.8.5",
     "dotenv": "7.0.0",
     "express": "^4.16.4",
-    "stripe": "6.28.0"
-  },
-  "devDependencies": {
+    "stripe": "6.28.0",
     "concurrently": "^4.0.1",
     "nodemon": "^1.19.1",
     "serverless-http": "^2.7.0",
     "netlify-lambda": "^2.0.3"
+  },
+  "scripts": {
+    "dev-start": "node server.js",
+    "start": "react-scripts start ",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "lint:fix": "eslint --fix src/**/*{js,jsx}",
+    "eject": "react-scripts eject",
+    "client": "npm run dev-start",
+    "server": "nodemon server-bak.js",
+    "build-netlify": "npm install && npm run build",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "npm install && npm install --only=dev --no-shrinkwrap && npm run build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.js?(x)"
+        ],
+        "rules": {
+          "semi": [
+            2,
+            "never"
+          ],
+          "quotes": [
+            2,
+            "single"
+          ]
+        }
+      }
+    ]
+  },
+  "prettier": {
+    "overrides": [
+      {
+        "files": [
+          "**/*.js?(x)"
+        ],
+        "options": {
+          "semi": false,
+          "singleQuote": true
+        }
+      }
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "enzyme": "^3.11.0",
+    "eslint": "^7.23.0",
+    "express": "^4.17.1",
+    "prettier": "^2.2.1",
+    "redux-persist-transform-filter": "^0.0.20",
+    "serve-static": "^1.14.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
