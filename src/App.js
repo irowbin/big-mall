@@ -6,6 +6,7 @@ import ShopPage from './pages/shop/shop-page.component'
 import Spinner from './components/spinner/spinner.component'
 import Navbar from './pages/navbar/navbar.component'
 import Toast from './components/toast/toast.component'
+import ErrorBoundary from './components/error-boundary/error-boundary.component'
 
 // lazy  components
 const HowToPage = lazy(() => import('./pages/how-to/how-to-page.component'))
@@ -18,30 +19,32 @@ const App = ({ checkUserSession, currentUser }) => {
   //   checkUserSession()
   // }, [checkUserSession])
   return (
-    <div className='container-fluid px-0'>
+    <div className="container-fluid px-0">
       <Navbar />
-      <div className='d-block fix-top-space'>
+      <div className="d-block fix-top-space">
         <Suspense fallback={<Spinner />}>
-          <Switch>
-            <Route exact
-                   path='/'
-                   component={HomePage} />
-            <Route path='/how-to'
-                   component={HowToPage} />
-            <Route path='/shop'
-                   component={ShopPage} />
-            <Route path='/checkout'
-                   component={CheckoutPage} />
-            <Route
-              path='/account'
-              render={() =>
-                currentUser ? <Redirect to='/' /> : <AccountPage />
-              }
-            />
-          </Switch>
+          <ErrorBoundary>
+            <Switch>
+              <Route exact
+                     path="/"
+                     component={HomePage} />
+              <Route path="/how-to"
+                     component={HowToPage} />
+              <Route path="/shop"
+                     component={ShopPage} />
+              <Route path="/checkout"
+                     component={CheckoutPage} />
+              <Route
+                path="/account"
+                render={() =>
+                  currentUser ? <Redirect to="/" /> : <AccountPage />
+                }
+              />
+            </Switch>
+          </ErrorBoundary>
         </Suspense>
       </div>
-      <Toast  />
+      <Toast />
     </div>
   )
 }

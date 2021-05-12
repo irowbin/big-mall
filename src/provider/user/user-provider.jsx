@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useReducer } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useReducer } from 'react'
 import {
   auth,
   googleAuthProvider,
@@ -16,8 +16,11 @@ import {
 
 export const UserContext = createContext(USER_INITIAL_STATE)
 
+export const useUserContext  = () => useContext(UserContext)
+
 const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, USER_INITIAL_STATE)
+  const store = useMemo(()=> ({state, dispatch}), [state, dispatch])
   const {
     isSigningStart,
     signInPayload,
@@ -105,7 +108,7 @@ const UserProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        state, dispatch
+       ...store
       }}>
       {children}
     </UserContext.Provider>

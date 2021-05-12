@@ -4,12 +4,12 @@ import './navbar.component.scss'
 import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
 import { signOutStart } from '../../store'
-import { UserContext, CartContext } from '../../provider'
+import { CartContext, useUserContext } from '../../provider'
 
 const Navbar = () => {
   const [isProfileDropdown, setIsProfileDropdown] = useState()
   const { toggleCartDropdown, isDropdownOpen } = useContext(CartContext)
-  const { state, dispatch } = useContext(UserContext)
+  const { state, dispatch } = useUserContext()
   const { currentUser } = state
   return (
     <nav className='navbar fixed-top  navbar-expand-lg navbar-dark bg-dark'>
@@ -54,6 +54,7 @@ const Navbar = () => {
             </li>
             <li className={`nav-item dropdown ${isProfileDropdown ? 'show' : ''}`}>
               <span
+                id="user-display-name-or-email"
                 className='nav-link dropdown-toggle'
                 onClick={() => [setIsProfileDropdown(!isProfileDropdown), isDropdownOpen ? toggleCartDropdown() :null]}
               >

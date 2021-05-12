@@ -56,6 +56,7 @@ const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([])
   const [cartCounts, setCartCounts] = useState(0)
   const [totalPrice, setTotalPrice] = useState(0)
+  const [hasCartItems, setHasCartItems] = useState(false)
 
   const toggleCartDropdown = () => setToggleDropdown(!isDropdownOpen)
   const addItem = item => setCartItems(normalizedItems(cartItems, item))
@@ -68,6 +69,8 @@ const CartProvider = ({ children }) => {
     setTotalPrice(cartItems.reduce((a,b)=> (a+b.price *b.qty),0).toFixed(2))
   }, [cartItems])
 
+  useEffect(()=>  setHasCartItems(cartItems.some(c=>c)), [cartItems])
+
   return (
     <CartContext.Provider value={{
       isDropdownOpen,
@@ -78,7 +81,8 @@ const CartProvider = ({ children }) => {
       cartCounts,
       clearFromCart,
       totalPrice,
-      resetCartItems
+      resetCartItems,
+      hasCartItems
     }}>
       {children}
     </CartContext.Provider>
