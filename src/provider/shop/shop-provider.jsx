@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from 'react'
+import { createContext, useEffect, useMemo, useReducer } from 'react'
 import { shopReducer } from '../../store/reducer/shop/shop-reducer'
 import {fetchShopCollectionSuccess,fetchShopCollectionFailure} from '../../store/action/shop/shop-action'
 import { firestore } from '../../firebase/firebase.service'
@@ -20,7 +20,8 @@ const mapApiData = (data) =>
 
 const ShopProvider = ({ children }) => {
   const [state, dispatch] = useReducer(shopReducer, INITIAL_STATE)
-  const {isFetching} = state
+  const store = useMemo(() => ({state, dispatch}), [state, dispatch])
+  const {isFetching} = store.state
   useEffect(()=>{
     if(!isFetching) return
     const fetchCollection = async () =>{
@@ -38,7 +39,7 @@ const ShopProvider = ({ children }) => {
   // TODO handle async
   return (
     <ShopContext.Provider
-      value={{ state, dispatch }}>
+      value={{ ...store }}>
       {children}
     </ShopContext.Provider>
   )

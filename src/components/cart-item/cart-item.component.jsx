@@ -1,14 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useMemo } from 'react'
 import { CartContext } from '../../provider/cart/cart-provider'
 
 const CartItem = () => {
-  const {clearFromCart, cartItems} = useContext(CartContext)
-  return (
+  const {clearFromCart, cartItems, hasCartItems} = useContext(CartContext)
+  return useMemo(() => (
     <div
       className="d-flex flex-column justify-content-center"
       style={{ maxHeight: '400px', overflowY: 'auto' }}
     >
-      {cartItems.some((s) => s) ? (
+      {hasCartItems ? (
         cartItems.map((item) => (
           <div key={item.uuid} className="mb-3 bg-light row mx-0">
             <div className="col-md-10 px-0">
@@ -38,7 +38,7 @@ const CartItem = () => {
         <span className="alert alert-info">Your Cart Empty</span>
       )}
     </div>
-  )
+  ),[hasCartItems, cartItems,clearFromCart])
 }
 // const mapStateToProps = createStructuredSelector({
 //   cartItems: selectCartItems,

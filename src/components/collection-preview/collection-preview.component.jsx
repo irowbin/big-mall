@@ -32,6 +32,7 @@ const CollectionPreview = ({ title, items,  match }) => {
                     src={item.imgUrl}
                     alt="Bologna"
                     style={{ height: '100%' }}
+                    crossOrigin={'anonymous'}
                   />
                   <div className="card-img-overlay text-center text-white d-flex flex-column justify-content-center align-items-center">
                     <div className="card-title item-desc"> {item.name}</div>
