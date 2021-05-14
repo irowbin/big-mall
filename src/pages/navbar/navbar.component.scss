@@ -38,3 +38,14 @@
 .pointer {
   cursor: pointer;
 }
+
+
+.github-link{
+    height: 100%;
+    display: flex;
+    .github-icon{
+      height: auto;
+      width: 30px;
+  }
+ 
+}

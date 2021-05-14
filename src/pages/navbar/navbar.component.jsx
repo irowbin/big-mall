@@ -5,7 +5,7 @@ import CartIcon from '../../components/cart-icon/cart-icon.component'
 import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component'
 import { signOutStart } from '../../store'
 import { CartContext, useUserContext } from '../../provider'
-
+import { ReactComponent as GithubIcon } from '../../assets/github.svg'
 const Navbar = () => {
   const [isProfileDropdown, setIsProfileDropdown] = useState()
   const { toggleCartDropdown, isDropdownOpen } = useContext(CartContext)
@@ -14,7 +14,7 @@ const Navbar = () => {
   return (
     <nav className='navbar fixed-top  navbar-expand-lg navbar-dark bg-dark'>
       <NavLink className='navbar-brand'
-               to='/'>
+        to='/'>
         BIG MALL
       </NavLink>
 
@@ -22,20 +22,20 @@ const Navbar = () => {
         <ul className='navbar-nav mr-auto'>
           <li className='nav-item'>
             <NavLink exact
-                     className='nav-link'
-                     to='/'>
+              className='nav-link'
+              to='/'>
               Home
             </NavLink>
           </li>
           <li className='nav-item '>
             <NavLink className='nav-link'
-                     to='/shop'>
+              to='/shop'>
               Shop
             </NavLink>
           </li>
           <li className='nav-item '>
             <NavLink className='nav-link'
-                     to='/how-to'>
+              to='/how-to'>
               User Guide
             </NavLink>
           </li>
@@ -45,10 +45,10 @@ const Navbar = () => {
             <li className='nav-item'>
               {!currentUser ?
                 (<NavLink exact
-                          className='nav-link'
-                          to='/account'>
-                    Signin
-                  </NavLink>
+                  className='nav-link'
+                  to='/account'>
+                  Signin
+                </NavLink>
                 ) : null
               }
             </li>
@@ -56,13 +56,12 @@ const Navbar = () => {
               <span
                 id="user-display-name-or-email"
                 className='nav-link dropdown-toggle'
-                onClick={() => [setIsProfileDropdown(!isProfileDropdown), isDropdownOpen ? toggleCartDropdown() :null]}
+                onClick={() => [setIsProfileDropdown(!isProfileDropdown), isDropdownOpen ? toggleCartDropdown() : null]}
               >
-                {currentUser?.displayName || currentUser?.email || (currentUser ? 'Profile' :'')}
+                {currentUser?.displayName || currentUser?.email || (currentUser ? 'Profile' : '')}
               </span>
-              <div className={`dropdown-menu dropdown-menu-right  ${
-                isProfileDropdown ? 'show' : ''
-              }`}
+              <div className={`dropdown-menu dropdown-menu-right  ${isProfileDropdown ? 'show' : ''
+                }`}
               >
                 <div
                   className="dropdown-item pointer"
@@ -75,18 +74,25 @@ const Navbar = () => {
             <li className={`nav-item dropdown ${isDropdownOpen ? 'show' : ''}`}>
               <span
                 className='nav-link py-0 dropdown-toggle'
-                onClick={()=>[toggleCartDropdown(), setIsProfileDropdown(false)]}
+                onClick={() => [toggleCartDropdown(), setIsProfileDropdown(false)]}
               >
                 <CartIcon />
               </span>
-              <div className={`dropdown-menu cart-dropdown-menu  px-2 py-2 dropdown-menu-right  ${
-                isDropdownOpen ? 'show' : ''
-              }`}
+              <div className={`dropdown-menu cart-dropdown-menu  px-2 py-2 dropdown-menu-right  ${isDropdownOpen ? 'show' : ''
+                }`}
               >
                 <div className='w-100'>
                   <CartDropdown />
                 </div>
               </div>
+            </li>
+            <li className='nav-item'>
+              <a href="http://github.com/irowbin/big-mall" 
+                 target="_blank" 
+                 rel="noopener noreferrer"
+                 className="github-link">
+                <GithubIcon className='github-icon' />
+              </a>
             </li>
           </ul>
         </div>
